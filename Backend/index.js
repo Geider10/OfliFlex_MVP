@@ -31,16 +31,13 @@ app.use("/", uploadRoutes);
 app.use("/sent-email", mailingRouter);
 
 // Conexión al puerto 3000
-const port = app.get("PORT");
-app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-});
-
-main().catch((err) => console.log(err));
-
+const PORT = process.env.PORT
+app.listen(PORT, () => console.log(`server run in port ${PORT}`));
 // Conexión con MongoDB
-async function main() {
-  await mongoose.connect(process.env.MONGO_URI, {
-    dbname: process.env.MONGO_DBNAME
-  });
+function main() {
+  mongoose.connect(process.env.MONGO_URI)
+  .then(()=> console.log('connect with mongo'))
+  .catch(()=> console.log('error to connection'))
 }
+main()
+
