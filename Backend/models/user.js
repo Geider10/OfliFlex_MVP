@@ -2,16 +2,17 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const UserSchema = new mongoose.Schema({
-    nombre: { type: String, require: true },
-    apellido: { type: String, require: true },
-    edad: { type: Number, require:true },
-    email: { type: String, require: true, unique: true },
+    nombre: { type: String, required: true },
+    apellido: { type: String, required: true },
+    edad: { type: Number, required:true },
+    email: { type: String, required: true, unique: true },
     password: { type: String 
         // quito el atributo de requerido ya que las constraseñas de google y facebook no llegan al modelo
         /*, require: true */ },
-    telefono: { type: Number, require: true,
+    telefono: { type: Number, required: true,
         //quito el atributo de unico ya que no todos los usuarios llegan al modelo desde los servicios de FB y G con este dato y se pueden repetir como null
         /*  unique: true */},
+    rol : {type:String,default:"propietario"},
     usuarioId: {
         type: mongoose.Schema.Types.ObjectId,
         index: true,
@@ -19,8 +20,7 @@ const UserSchema = new mongoose.Schema({
         auto: true,
     },
     googleId: { type: String, default: "" },
-    facebookId: { type: String },
-    rol: { type: String, enum: ["usuario", "propietario", "admin"] , default: 'usuario'},
+    facebookId: { type: String, default : ""},
     listaReservas: { type: Array, default: []},
     listaServicios: { type: Array, default: []},
     imagenUrl: { type: String, default: '' }
@@ -47,4 +47,4 @@ UserSchema.methods.isValidPassword = async function(password){
     return compare;
 }
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model('users', UserSchema)

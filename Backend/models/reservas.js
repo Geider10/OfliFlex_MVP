@@ -21,4 +21,4 @@ const ReservaSchema = new mongoose.Schema({
   feedback: { type: String, require: false, default: "" },
 });
 
-module.exports = mongoose.model("Reserva", ReservaSchema);
+module.exports = mongoose.model("bookings", ReservaSchema);

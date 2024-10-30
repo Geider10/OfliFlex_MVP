@@ -3,7 +3,6 @@ const passport = require('passport');
 const authRouter = express.Router()
 const jwt = require('jsonwebtoken')
 
-
 // Ruta de registro
 authRouter.post('/register', (req, res, next) => {
     passport.authenticate('signup', { session: false }, (err, user, info) => {
