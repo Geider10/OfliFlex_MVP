@@ -1,7 +1,5 @@
-// TODO: mirar comentario en trello sprint 4
-
 const {servicioModel} = require('../models/servicios')
-const Usuario = require('../models/user')
+const {userModel} = require('../models/user')
 
 const crearServicio = async (req, res) => {
   try {
@@ -13,7 +11,7 @@ const crearServicio = async (req, res) => {
       });
     }
     // Buscar el propietario que crea el servicio
-    const usuarioAEditar = await Usuario.findOne({ _id: usuarioId });
+    const usuarioAEditar = await userModel.findOne({ _id: usuarioId });
     if (!usuarioAEditar) return res.status(400).json({ error: 'No se encontró al usuario' });
     const nuevoServicio = new servicioModel({
       titulo: titulo,

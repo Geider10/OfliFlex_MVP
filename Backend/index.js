@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
 
-// RUTAS
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/reservas", reservasRoutes);
@@ -30,10 +29,9 @@ app.use("/servicios", serviciosRoutes);
 app.use("/", uploadRoutes);
 app.use("/sent-email", mailingRouter);
 
-// Conexión al puerto 3000
 const PORT = process.env.PORT
 app.listen(PORT, () => console.log(`server run in port ${PORT}`));
-// Conexión con MongoDB
+
 function main() {
   mongoose.connect(process.env.MONGO_URI)
   .then(()=> console.log('connect with mongo'))
