@@ -1,5 +1,5 @@
 const passport = require('passport')
-const User = require('../models/user')
+const {userModel} = require('../models/user')
 
 // Requerimientos para passport:
 const localStrategy = require('passport-local').Strategy
@@ -18,7 +18,7 @@ passport.use('signup', new localStrategy({
     const { nombre, apellido, edad, telefono } = req.body;
 
     try {
-        const nuevoUsuario = new User({
+        const nuevoUsuario = new userModel({
             nombre,
             apellido,
             email,
@@ -40,7 +40,7 @@ passport.use('login', new localStrategy({
     passwordField: 'password',
 }, async (email, password, done) => {
     try {
-        const user = await User.findOne({ email })
+        const user = await userModel.findOne({ email })
         if (!user) {
             return done(null, false, { message: 'Usuario no encontrado' })
         }
@@ -82,7 +82,7 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       try {
         //verifico que exista el usuario de google en la db
-        let user = await User.findOne({ googleId: profile.id });
+        let user = await userModel.findOne({ googleId: profile.id });
         //si ya existe continuo
         if (user) {
           console.log("ya existe usuario de google: ", user.nombre);
@@ -92,7 +92,7 @@ passport.use(
           });
         }
         //verifico si el usuario que se inteta registrar ya existe con su mail en la db
-        user = await User.findOne({ email: profile.emails[0].value });
+        user = await userModel.findOne({ email: profile.emails[0].value });
         //si ya existe actualizo el google id en la db
 
         if (user) {
@@ -101,7 +101,7 @@ passport.use(
           return done(null, user);
         }
         //si no sucede ninguno de los 2 casos creo el usuario nuevo en la db
-        const newUser = new User({
+        const newUser = new userModel({
           googleId: profile.id,
           nombre: profile.displayName,
           email: profile.emails[0].value,
@@ -126,13 +126,13 @@ passport.use(new FacebookStrategy({
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         console.log("auth.js log1", profile)
-        const user = await User.findOne({ facebookId: profile.id });
+        const user = await userModel.findOne({ facebookId: profile.id });
 
         if (user) {
             return done(null, user);
         }
 
-        const newUser = new User({
+        const newUser = new userModel({
             facebookId: profile.id,
             nombre: profile.displayName,
             email: profile.emails[0].value,
