@@ -26,7 +26,7 @@ const Header = () => {
   const handleLogout = () => {
     // Lógica para cerrar sesión
     localStorage.removeItem("token");
-    navigate("/login");
+    navigate("/");
     setLoggedIn(false);
   };
 

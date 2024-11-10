@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 import Context from '../../context/context.jsx';
 
 const Iniciar_sesion = () => {
-  const { msgError, msgSuccess, loggedIn, setLoggedIn, navigate } = useContext(Context);
+  const { msgError, msgSuccess, setLoggedIn, navigate } = useContext(Context);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,12 +18,12 @@ const Iniciar_sesion = () => {
       const response = await axios.post('http://localhost:3000/auth/login', { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
-      console.log('Iniciaste sesión')
-      msgSuccess("Sesión iniciada con éxito")
-
       setLoggedIn(true);
+      msgSuccess("Sesión iniciada con éxito")
       //navego al inicio luego de loguear para no perder el estado y no se vuelva a setear en false
-      navigate("/");
+      setTimeout(()=>{
+        navigate("/");
+      },2000)
     } catch (error) {
       console.error('Error al iniciar sesión:', error.response.data);
       msgError("Error al iniciar sesión. Registrese o vuelva a intentar")
@@ -50,7 +50,7 @@ const Iniciar_sesion = () => {
           autoComplete='current-password'
         />
         <button type="submit" className={styles.btn}>Ingresar</button>
-        <NavLink to="/Registro" className={styles.parrafo}>Olvidé mi contraseña</NavLink>
+        <p className={styles.parrafo}>¿No tienes una cuenta? Presiona crear cuenta</p>
       </form>
       <ToastContainer />
     </div>

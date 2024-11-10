@@ -24,12 +24,11 @@ function Registro() {
     }
   };
 
-  // Si registered es true, redirigir al Home ('/')
   // Redirijo al usuario a la vista de iniciar sesión, cambio el estado de renderizado setLogin
   if (registered) {
     setTimeout(() => {
       setLogin(true);
-    }, 1500);
+    }, 2000);
     loginRef.current.classList.add("active");
   }
 
@@ -145,11 +144,8 @@ function Registro() {
         </div>
       
 
-        <button onClick={onSubmit} type="submit" className={styles.btn}>
-          Crear cuenta
-        </button>
-
-        <NavLink to="/IniciarSesion" className={styles.parrafo}>¿Ya tienes una cuenta? Inicia sesión aquí</NavLink>
+        <button onClick={onSubmit} type="submit" className={styles.btn}> Crear cuenta </button>
+        <p className={styles.parrafo}>¿No tienes una cuenta? Presiona iniciar sesión</p>
       </form>
       <ToastContainer />
     </div>
