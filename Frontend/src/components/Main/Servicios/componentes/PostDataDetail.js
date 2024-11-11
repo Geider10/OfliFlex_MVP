@@ -7,17 +7,16 @@ function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLo
   const { authToken, msgError } = useContext(Context);
 
   const [postData, setPostData] = useState({
-    servicioId: "",
+    servicioID: "",
     usuarioId: "",
     usuarioReserva: "",
     servicioReservado: ""
   });
   useEffect(() => {
     if (servicio && usuario) {
-      //console.log("usuario",usuario)
-      //console.log("servicio",servicio)
+
       setPostData({
-        servicioId: servicio._id,
+        servicioID: servicio._id,
         usuarioId: usuario._id,
         usuarioReserva: usuario.nombre,
         servicioReservado: servicio.titulo

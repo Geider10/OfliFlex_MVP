@@ -14,21 +14,22 @@ const ServicioForm = () => {
 
         const form = new FormData(e.target);
         const formData = {
+            usuarioId: usuario._id,
             titulo: form.get('titulo'),
             descripcion: form.get('descripcion'),
             imagen: form.get('imagen'),
             disponible: true,
             fecha: form.get('fecha'),
             hora: form.get('hora'),
-            categoria: form.get('categoria'),
-            usuarioId: usuario._id,
+            categoria: form.get('categoria')
+            
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:3000/servicios', formData,
+            const response = await axios.post('http://localhost:3000/servicios', formData,
                 {
                     headers: {
-                        authorization: 'Bearer ' + authToken
+                        Authorization: 'Bearer ' + authToken
                     }
                 }
             );
@@ -63,7 +64,7 @@ const ServicioForm = () => {
                         </div>
                         <div>
                             <select name="categoria" className={styles.inputs}>
-                                <option value='' selected disabled>Categoría</option>
+                                <option value='' disabled>Categoría</option>
                                 <option value="Oficinas">Oficinas</option>
                                 <option value="Salas">Salas</option>
                                 <option value="Eventos">Eventos</option>
