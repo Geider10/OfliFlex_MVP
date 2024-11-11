@@ -1,13 +1,14 @@
 // ServicioForm.js
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import styles from '../panel.module.css'
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
+import { ToastContainer } from "react-toastify";
 
 const ServicioForm = () => {
-
-    const { authToken, usuario } = useContext(Context);
+    const { authToken, usuario, msgSuccess} = useContext(Context);
+    const formRef = useRef(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -33,15 +34,15 @@ const ServicioForm = () => {
                     }
                 }
             );
-            console.log('Servicio creado:', response.data);
-            console.log(usuario.listaServicios)
+            msgSuccess('Se creo un servicio con éxito')
+            formRef.current.reset()            
         } catch (error) {
             console.error('Error al crear el servicio:', error);
         }
     };
 
     return (
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form} ref={formRef}>
                 <div className={styles.card_info}>
                     <div className={styles.img_servicio}>
                         <input type="text" name="imagen" placeholder='Imágen' required className={styles.input_img} />
@@ -75,6 +76,7 @@ const ServicioForm = () => {
                 <div className={styles.btn_container}>
                     <button type="submit" className={styles.btn}>Crear</button>
                 </div>
+                <ToastContainer/>
             </form>
     );
 };
