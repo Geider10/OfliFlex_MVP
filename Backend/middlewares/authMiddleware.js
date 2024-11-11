@@ -8,7 +8,7 @@ function verifyToken(req, res, next) {
         req.userId = decoded.user._id;
         next()
     } catch (error) {
-        res.status(401).json({ error: 'Token inválido' })
+        res.status(401).json({ error: 'Token inválido by auth' })
     }
 }
 
