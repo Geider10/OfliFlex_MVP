@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const ServicioSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
+    required :true
   },
   servicioID: {
     type: mongoose.Schema.Types.ObjectId,

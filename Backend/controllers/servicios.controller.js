@@ -3,17 +3,18 @@ const {userModel} = require('../models/user')
 
 const crearServicio = async (req, res) => {
   try {
-    const { titulo, descripcion, imagen, fecha, hora, categoria, usuarioId } = req.body;
+    const { titulo, descripcion, imagen, fecha, hora, categoria, userId } = req.body;
 
-    if (!titulo || !descripcion || !imagen || !fecha || !hora || !categoria || !usuarioId) {
+    if (!titulo || !descripcion || !imagen || !fecha || !hora || !categoria || !userId) {
       return res.status(400).json({
         error:"Se requiere el _id del usuario, titulo, descripcion, imagen, fecha, hora y categoria para crear un servicio",
       });
     }
     // Buscar el propietario que crea el servicio
-    const usuarioAEditar = await userModel.findOne({ _id: usuarioId });
+    const usuarioAEditar = await userModel.findOne({ _id: userId });
     if (!usuarioAEditar) return res.status(400).json({ error: 'No se encontró al usuario' });
     const nuevoServicio = new servicioModel({
+      userId : userId,
       titulo: titulo,
       descripcion: descripcion,
       imagen: imagen,
@@ -84,12 +85,36 @@ const obtenerServicioPorId = async (req, res) => {
     res.json({error : e})
   }
 }
-
+const editarServicio = async (req,res) => {
+  try {
+    const id = req.params.servicioId
+    const bodyService = req.body
+    const service = await servicioModel.findOne({servicioID : id})
+    if (!service) res.json({error : 'service not found'})
+    for (const key in service) {
+      if (bodyService.hasOwnProperty(key)) {
+        service[key] = bodyService[key]
+      }
+    }
+    await service.save()
+    res.json({succes : 'req put service', payload : service})
+  } catch (error) {
+    res.json({error: error})
+  }
+}
 const eliminarServicio = async (req, res) => {
     try {
       const servicioId = req.params.servicioId
+      const servicio = await servicioModel.findOne({servicioID: servicioId})
+      console.log(servicio);
+      if (!servicio) return res.status(404).json({error : 'servicio not found'})
+      const propietario = await userModel.findOne({_id : servicio.userId})
+      if (!propietario) return res.status(404).json({error : 'propietario not found'})
+      const filterServicios = propietario.listaServicios.filter( s => s.servicioID != servicioId)
+      console.log(filterServicios);
+      await userModel.updateOne({_id : servicio.userId} , {$set : {listaServicios : filterServicios}})
       const servicioAEliminar = await servicioModel.deleteOne({ servicioID: servicioId }).exec()
-      if (servicioAEliminar.deletedCount == 0) return res.status(404).json({ error: 'servicioModel no encontrado' })
+      if (servicioAEliminar.deletedCount == 0) return res.status(404).json({ error: 'no se elimino dicho servicio' })
       res.status(200).json({ success: 'servicioModel eliminado correctamente' })
     } catch (e) {
       res.json({error : e})
@@ -101,5 +126,6 @@ module.exports = {
     obtenerServicios,
     obtenerServicioPorCategoria,
     obtenerServicioPorId,
-    eliminarServicio
+    eliminarServicio,
+    editarServicio
 }
