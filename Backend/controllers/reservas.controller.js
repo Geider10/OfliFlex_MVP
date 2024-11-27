@@ -5,12 +5,11 @@ const {servicioModel} = require("../models/servicios")
 const crearReserva = async (req, res) => {
   const { servicioID, usuarioId, usuarioReserva, servicioReservado } = req.body;
   if (!servicioID || !usuarioId) return res.status(400).json({ error: "Se requiere un servicio a reservar y un usuario que reserve"});
-  console.log(servicioID);
   try {
     const usuarioAEditar = await userModel.findOne({ _id: usuarioId }).exec();
     if (!usuarioAEditar) return res.status(400).json({ error: 'No se encontró al usuario' });
     // Actualizar estado del servicio a no disponible y obtener el servicio actualizado
-    await servicioModel.updateOne({servicioID : servicioID}, { disponible: false });
+    await servicioModel.updateOne({servicioID : servicioID}, {$set : { disponible: false }});
     // Crear reserva nueva
     const nuevaReserva = new reservaModel({ servicioID, usuarioId, usuarioReserva, servicioReservado });
     await nuevaReserva.save();        
@@ -62,22 +61,29 @@ const feedBack = async (req, res) => {
   }
 };
 
-/* const cancelarReserva = async (req, res) => {
-    const ReservaACancelar = await reservaModel.findOne({ reservaId: req.params.reservaId }).exec()
-
-    if (!ReservaACancelar) {
-        return res.status(404).json({ error: 'reservaModel no encontrada' })
-    } else {
-        ReservaACancelar.cancelada = true;
-
-        await ReservaACancelar.save()
-        return res.status(200).json({ error: 'reservaModel cancelada correctamente' })
-    }
-} */
+const cancelarReserva = async (req, res) => {
+  try {
+    const idReserva = req.params.reservaId 
+    const reserva = await reservaModel.findOne({reservaId : idReserva})
+    if(!reserva) return res.status(400).json({ error: "reserva not found"})
+    const userRol = await userModel.findOne({_id : reserva.usuarioId})
+    if(!userRol) return res.status(400).json({ error: "user not found"})
+    //clen the booking of user
+    const reservasFilter = userRol.listaReservas.filter(r => r.reservaId != idReserva)
+    await userModel.updateOne({_id : reserva.usuarioId}, {$set: {listaReservas : reservasFilter}})
+    // chage status of service && delete reserva
+    await servicioModel.updateOne({servicioID : reserva.servicioID}, {$set : { disponible : true}})
+    await reservaModel.deleteOne({reservaId : idReserva})
+    res.json({success : 'req put for cancel booking'})
+  } catch (error) {
+    res.json({error: error})
+  }
+}
 
 module.exports = {
   crearReserva,
   obtenerReservas,
   obtenerReservasPorId,
   feedBack,
+  cancelarReserva
 };

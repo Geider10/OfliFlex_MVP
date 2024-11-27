@@ -7,6 +7,6 @@ reservaRouter.get("/", verifyToken, reservaController.obtenerReservas);
 reservaRouter.get("/:reservaId", verifyToken, reservaController.obtenerReservasPorId);
 reservaRouter.post("/", verifyToken, reservaController.crearReserva);
 reservaRouter.put("/:reservaId", verifyToken, reservaController.feedBack);
-/* reservaRouter.put('/:reservaId', verifyToken, reservaController.cancelarReserva) */
+reservaRouter.put('/cancel/:reservaId', verifyToken, reservaController.cancelarReserva)
 
 module.exports = reservaRouter;

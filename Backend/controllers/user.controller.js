@@ -29,13 +29,13 @@ const eliminarUsuario = async (req, res) => {
     }
 }
 const editarUsuario = async (req, res) => {
-    const newUser = req.body; // TODO: nombre,apellido, edad y telefono NADA MAS.
+    const newUser = req.body; // Todo menos el email 
     const usuarioAEditar = await userModel.findOne({ _id: req.params.usuarioId }).exec()
     try {
-        if (!usuarioAEditar) return res.status(404).json({ mensaje: 'userModel no encontrado' })
+        if (!usuarioAEditar) return res.status(404).json({ mensaje: 'user no encontrado' })
 
         for (const value in usuarioAEditar) {//iterrar sobre los atributos del user de DB
-            if (newUser.hasOwnProperty(value)) {//valida si coinciden los atributos entre ambos tipo de users
+            if (newUser.hasOwnProperty(value) && value !== 'email') {//valida si coinciden los atributos del user nuevo con el u. viejo
                 usuarioAEditar[value] = newUser[value]
             }
         }
