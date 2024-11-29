@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
-
+//logica para hacer crear una reserva, POST
 function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLoading }) {
 
   const { authToken, msgError } = useContext(Context);
@@ -10,16 +10,18 @@ function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLo
     servicioID: "",
     usuarioId: "",
     usuarioReserva: "",
-    servicioReservado: ""
+    servicioReservado: "",
+    fecha: ""
   });
   useEffect(() => {
     if (servicio && usuario) {
 
       setPostData({
-        servicioID: servicio._id,
+        servicioID: servicio.servicioID,
         usuarioId: usuario._id,
         usuarioReserva: usuario.nombre,
-        servicioReservado: servicio.titulo
+        servicioReservado: servicio.titulo,
+        fecha: servicio.fecha
       });
     }
   }, [servicio, usuario]);
