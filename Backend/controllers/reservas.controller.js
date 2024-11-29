@@ -3,7 +3,7 @@ const {userModel} = require("../models/user");
 const {servicioModel} = require("../models/servicios")
 
 const crearReserva = async (req, res) => {
-  const { servicioID, usuarioId, usuarioReserva, servicioReservado } = req.body;
+  const { servicioID, usuarioId, usuarioReserva, servicioReservado, fecha} = req.body;
   if (!servicioID || !usuarioId) return res.status(400).json({ error: "Se requiere un servicio a reservar y un usuario que reserve"});
   try {
     const usuarioAEditar = await userModel.findOne({ _id: usuarioId }).exec();
@@ -11,7 +11,7 @@ const crearReserva = async (req, res) => {
     // Actualizar estado del servicio a no disponible y obtener el servicio actualizado
     await servicioModel.updateOne({servicioID : servicioID}, {$set : { disponible: false }});
     // Crear reserva nueva
-    const nuevaReserva = new reservaModel({ servicioID, usuarioId, usuarioReserva, servicioReservado });
+    const nuevaReserva = new reservaModel({ servicioID, usuarioId, usuarioReserva, servicioReservado, fecha});
     await nuevaReserva.save();        
     // Agrego la nueva reserva las citas de ambos:
     usuarioAEditar.listaReservas.push(nuevaReserva);
@@ -19,7 +19,7 @@ const crearReserva = async (req, res) => {
     await usuarioAEditar.save();
     res.status(201).json({
       reservaId: nuevaReserva._id,
-      mensaje: 'reservaModel creada y estado del servicio actualizado correctamente'
+      mensaje: 'reserva creada y estado del servicio actualizado correctamente'
     });
   } catch (e) {
     res.json({error: e.message})

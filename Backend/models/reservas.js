@@ -16,8 +16,7 @@ const ReservaSchema = new mongoose.Schema({
   },
   usuarioReserva: { type: String, required: true },
   servicioReservado: { type: String, required: true },
-  fechaCreacion: { type: mongoose.Schema.Types.Date, auto: true },
-  estado: { type: String, enum: ["activa", "realizada"], default: "activa" },
+  fecha : {type: String, required : true},
   feedback: { type: String, required: false, default: "" },
 });
 
