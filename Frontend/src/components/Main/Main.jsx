@@ -14,11 +14,10 @@ import Galeria from './Galeria2/Galeria2.jsx'
   return (
     <div className={styles.container}>
       <Routes>
-
+        
         <Route path="/" element={<Inicio />} />
-        <Route path='/servicios' element={<Servicios />} />
+        {/* <Route path='/servicios' element={<Servicios />} /> */}
         <Route path='/servicios/:categoria' element={<ServicioCategoria />} />
-
         <Route path='/servicios/:categoria/:id' element={<ServicioDetail />} />
         <Route path='/galeria' element={<Galeria />} />
         <Route path='/contacto' element={<Contacto />} />

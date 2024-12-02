@@ -25,16 +25,18 @@ const Header = () => {
 
   const handleLogout = () => {
     // Lógica para cerrar sesión
-    localStorage.removeItem("token");
-    navigate("/");
-    setLoggedIn(false);
+    setTimeout(()=>{
+      localStorage.removeItem("token");
+      navigate("/");
+      setLoggedIn(false);
+    },2000)
   };
 
   return (
     <div className={`${styles.container} ${!show ? styles.hidden : ""}`}>
       <div className={styles.container_menu}>
         <Link to="/">
-          <img className={styles.logo} src="/logotipo.png" alt="logo" />
+          <img className={styles.logo} src="/Logotipo.png" alt="logo" />
         </Link>
         <ul className={styles.container_ul}>
           <NavLink
@@ -49,7 +51,7 @@ const Header = () => {
             className={({ isActive }) =>
               isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
             }
-            to="/servicios"
+            to="/servicios/oficinas"
           >
             Servicios
           </NavLink>
