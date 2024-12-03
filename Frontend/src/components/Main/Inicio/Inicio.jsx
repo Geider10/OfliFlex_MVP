@@ -15,7 +15,7 @@ const Inicio = () => {
       </div>
       {/* Servicios */}
       <div className={styles.container_servicios}>
-        <h2 className={styles.subtitle}>Espacios con soluciones modernas</h2>
+        <h2 className={styles.subtitle}>Soluciones modernas</h2>
         <Servicios/>
         <NavLink to={'/servicios/oficinas'} className={styles.reservar_button}>Reservar</NavLink>
 

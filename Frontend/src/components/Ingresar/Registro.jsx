@@ -144,7 +144,7 @@ function Registro() {
         </div>
       
 
-        <button onClick={onSubmit} type="submit" className={styles.btn}> Crear cuenta </button>
+        <button type="submit" className={styles.btn}> Crear cuenta </button>
         <p className={styles.parrafo}>¿No tienes una cuenta? Presiona iniciar sesión</p>
       </form>
       <ToastContainer />

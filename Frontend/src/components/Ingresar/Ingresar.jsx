@@ -35,8 +35,8 @@ function Ingresar() {
 
           <div className={styles.container_buttons}>
             <button onClick={handleGoogleLogin} className={styles.btn_services}><FcGoogle />Continuar con Google</button>
-            <button onClick={handleFacebookLogin} className={styles.btn_services}><SiFacebook />Continuar con Facebook</button>
-            <button className={styles.btn_services}><FaApple />Continuar con Apple</button>
+            {/* <button onClick={handleFacebookLogin} className={styles.btn_services}><SiFacebook />Continuar con Facebook</button> */}
+            {/* <button className={styles.btn_services}><FaApple />Continuar con Apple</button> */}
           </div>
 
           {login ? <Iniciar_sesion /> : <Registro />}
