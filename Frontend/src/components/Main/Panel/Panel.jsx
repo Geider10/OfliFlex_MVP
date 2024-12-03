@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Usuario } from './Usuario';
-import { Admin } from './Admin';
 import { Propietario } from './Propietario';
 import Context from '../../../context/context';
 import styles from "./panel.module.css"
@@ -20,8 +19,6 @@ export const Panel = () => {
     switch (usuario.rol) {
       case 'usuario':
         return rol = <Usuario />;
-      case 'admin':
-        return rol = <Admin />;
       case 'propietario':
         return rol = <Propietario />;
       default:

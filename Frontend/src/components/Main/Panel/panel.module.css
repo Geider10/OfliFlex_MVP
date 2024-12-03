@@ -24,6 +24,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  margin-bottom: 5px;
 }
 
 .container_img_perfil {
@@ -72,25 +73,6 @@ input[type="file"] {
  font-size: 1.6rem;
 }
 
-.file_label {
-  display: inline-block;
-  padding: 5px 25px;
-  cursor: pointer;
-  background-color: #4CAF50;
-  color: white;
-  border-radius: 5px;
-  font-size: .9rem;
-  text-align: center;
-  width: 100%;
-}
-
-.file_label:hover {
-  background-color: #45a049;
-}
-
-.file_label:active {
-  background-color: #3e8e41;
-}
 
 .container_more_info{
   display: flex;
@@ -127,18 +109,25 @@ input[type="file"] {
   font-weight: 300;
   text-indent: 3px;
 }
-
+.btn_edit{
+  background-color: rgb(247, 244, 244);;
+  border-radius: 5px ;
+  display: inline-block;
+  padding: 2px 20px;
+  width: 100%;
+}
 
 .file_label {
   display: inline-block;
-  padding: 5px 25px;
+  padding: 2px 20px;
   cursor: pointer;
   background-color: #4CAF50;
   color: white;
   border-radius: 5px;
-  font-size: .9rem;
   text-align: center;
   width: 100%;
+  border: none;
+
 }
 
 .file_label:hover {
@@ -391,6 +380,8 @@ input[type="file"] {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 5px;
+  margin-top: 5px;
 }
 
 .btn {
