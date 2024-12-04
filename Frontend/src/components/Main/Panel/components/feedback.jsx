@@ -5,14 +5,33 @@ import axios from "axios";
 import Context from "../../../../context/context.jsx";
 
 const feedback = ({ id }) => {
-  const { authToken } = useContext(Context);
+  const { authToken} = useContext(Context);
   const [feedback, setFeedback] = useState("");
   const [reserva, setReserva] = useState(null);
-
+  const [idRes, setIdRes] = useState('')
   useEffect(() => {
-    const fetchData = async () => {
+    const getReservas = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/reservas/${id}`, {
+        const reservas = await axios.get('http://localhost:3000/reservas',
+          {headers : {
+            Authorization: `Bearer ${authToken}`
+          }}
+        )
+        const idReserva = reservas.data.find(r => r.servicioID == id)
+        setIdRes(idReserva.reservaId)
+      } catch (error) {
+        console.error("Error al obtener las reservas:", error);
+      }
+    }
+   
+    getReservas()
+  }, [id, authToken]);
+
+  useEffect(()=>{
+    if (!idRes) return; // Evita ejecutar si `idRes` no está definido
+    const getReservaId = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3000/reservas/${idRes}`, {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
@@ -23,16 +42,15 @@ const feedback = ({ id }) => {
         console.error("Error al obtener la reserva:", error);
       }
     };
+    getReservaId();
 
-    fetchData();
-  }, [id, authToken]);
+  },[idRes,authToken])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const response = await axios.put(
-        `http://localhost:3000/reservas/${id}`,
+        `http://localhost:3000/reservas/${idRes}`,
         { feedback },
         {
           headers: {
@@ -40,7 +58,6 @@ const feedback = ({ id }) => {
           },
         }
       );
-      console.log("Respuesta del servidor:", response.data);
       setReserva((prev) => ({ ...prev, feedback: response.data.feedback || feedback }));
     } catch (error) {
       console.error("Error al enviar el feedback:", error);
@@ -59,7 +76,7 @@ const feedback = ({ id }) => {
       </h3>
      
       {reserva.feedback ? (
-        <div>{reserva.feedback}</div>
+        <p>{reserva.feedback}</p>
       ) : (
           <div className={styles.container_form}>
             <textarea

@@ -10,10 +10,10 @@ const CardServicio = ({imagen, titulo, fecha, hora, categoria}) => {
       <div className={styles.container_text}>
         <div className={styles.info}>
           <h2 className={styles.title_card}>{titulo}</h2>
+          <p>{categoria}</p>
           <p className={styles.p_fecha}><BiCalendarAlt />{fecha}</p>
           <p className={styles.p_fecha}><BiAlarm />{hora}hs</p>
         </div>
-        <p>{categoria}</p>
       </div>
 
       </div>

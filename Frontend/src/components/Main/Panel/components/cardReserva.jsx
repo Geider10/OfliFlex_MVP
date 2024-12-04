@@ -3,8 +3,9 @@ import styles from "../panel.module.css";
 import { BiAlarm } from "react-icons/bi";
 import { BiCalendarAlt } from "react-icons/bi";
 import Feedback from "./feedback";
+import CancelReserva from "./CancelReserva";
 
-const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id }) => {
+const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id, descripcion}) => {
   const [showFeedback, setShowFeedback] = useState(false);
 
   const handleToggleFeedback = () => {
@@ -19,15 +20,17 @@ const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id }) => {
         <div className={styles.container_text}>
           <div className={styles.info}>
             <h2 className={styles.title_card}>{titulo}</h2>
+            <p>{categoria}</p>
             <p className={styles.p_fecha}><BiCalendarAlt />{fecha}</p>
             <p className={styles.p_fecha}><BiAlarm />{hora}hs</p>
+            <p>{descripcion}</p>
           </div>
 
           <div className={styles.container_end}>
-            <p>{categoria}</p>
             <button className={styles.btn_calificar} onClick={handleToggleFeedback}>
               {showFeedback ? "Ocultar" : "Feedback"}
             </button>
+            <CancelReserva id={id}/>
           </div>
         </div>
       </div>

@@ -11,7 +11,7 @@ const [reservas, setReservas] = useState(usuario.listaReservas);
 const [reservasFiltradas, setReservasFiltradas] = useState([]); // Para almacenar las reservas filtradas
 
 
-const aplicarFiltro = (nuevoFiltro) => {
+const aplicarFiltro = (nuevoFiltro = filtro) => {
   const hoy = new Date();
 
   const reservasFiltradas = reservas.filter((reserva) => {
@@ -38,15 +38,14 @@ const aplicarFiltro = (nuevoFiltro) => {
       const data = reservas.map((reserva) => {
         // Buscar el servicio correspondiente a la reserva
         const servicio = servicios.find(s => s.servicioID.toString() == reserva.servicioID.toString());
-        console.log(servicio);
         return servicio // Añadir el servicio a data
       })
       setReservas(data);
       aplicarFiltro(filtro);
     } else {
-      console.warn("Reservas o servicios no disponibles");
+      console.error("Reservas o servicios no disponibles");
     }
-  }, []);
+  }, [usuario,servicios]);
   
   return (
     <div className={styles.container_user_panel}>
@@ -64,16 +63,17 @@ const aplicarFiltro = (nuevoFiltro) => {
           <option value="finalizadas">Finalizadas</option>
         </select>
 
-        { reservasFiltradas.length > 0 ? reservasFiltradas.map((reserva, index) => {
+        { reservasFiltradas.length > 0 ? reservasFiltradas.map((servicio, index) => {
           return (
             <CardReserva
               key={index}
-              id={reserva.reservaId}
-              imagen={reserva.imagen}
-              titulo={reserva.titulo}
-              fecha={reserva.fecha}
-              hora={reserva.hora}
-              categoria={reserva.categoria}
+              id={servicio.servicioID}
+              imagen={servicio.imagen}
+              titulo={servicio.titulo}
+              fecha={servicio.fecha}
+              hora={servicio.hora}
+              categoria={servicio.categoria}
+              descripcion={servicio.descripcion}
             />
           );
         }) 

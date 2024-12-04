@@ -38,7 +38,6 @@ const ServicioDetail = () => {
             <div>
               <h1 className={styles.titulo}>{servicio.titulo}</h1>
               <p>{servicio.descripcion}</p>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum provident ab quaerat illum adipisci accusamus aut, aperiam, beatae, consequuntur aliquam neque aspernatur doloribus facere porro magni dicta minus? Placeat, fugit.</p>
             </div>
             <div className={styles.center_row}>
               <p className={styles.fecha_hora}>{servicio.fecha}</p>
