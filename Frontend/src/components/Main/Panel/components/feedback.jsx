@@ -9,6 +9,7 @@ const feedback = ({ id }) => {
   const [feedback, setFeedback] = useState("");
   const [reserva, setReserva] = useState(null);
   const [idRes, setIdRes] = useState('')
+  const [editFeedback, setEditFeedback] = useState(false)
   useEffect(() => {
     const getReservas = async () => {
       try {
@@ -46,8 +47,7 @@ const feedback = ({ id }) => {
 
   },[idRes,authToken])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     try {
       const response = await axios.put(
         `http://localhost:3000/reservas/${idRes}`,
@@ -59,10 +59,29 @@ const feedback = ({ id }) => {
         }
       );
       setReserva((prev) => ({ ...prev, feedback: response.data.feedback || feedback }));
+      setEditFeedback(true)
     } catch (error) {
       console.error("Error al enviar el feedback:", error);
     }
   };
+  const handleEdit =async () =>{
+    try {
+        const response = await axios.put(
+        `http://localhost:3000/reservas/${idRes}`,
+        { feedback : ''},
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      console.log(response);
+      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || '' }));
+      setEditFeedback(false)
+    } catch (error) {
+      console.error("Error al enviar el feedback:", error);
+    }
+  }
 
   if (!reserva) {
     return <div>Cargando reserva...</div>;
@@ -71,12 +90,11 @@ const feedback = ({ id }) => {
   return (
     
     <div className={styles.container_feedback}>
-      <h3 className={styles.title_card}>
-        <TiStar className={styles.star} /> Feedback:
-      </h3>
-     
+      <h3 className={styles.title_card}> Feedback</h3>
+        
+      {(editFeedback || reserva.feedback) && <button onClick={handleEdit}>Editar</button>}
       {reserva.feedback ? (
-        <p>{reserva.feedback}</p>
+         <p>{reserva.feedback}</p>
       ) : (
           <div className={styles.container_form}>
             <textarea
@@ -87,10 +105,7 @@ const feedback = ({ id }) => {
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
             />
-            <button className={styles.btn_calificar} onClick={handleSubmit}>
-              Enviar
-            </button>
-
+            <button className={styles.btn_calificar} onClick={handleSubmit}>Enviar</button>
         </div>
       )}
     </div>

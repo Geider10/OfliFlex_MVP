@@ -58,7 +58,7 @@ const CancelReserva = ({id}) => {
     }
 
     return (
-        <button className={styles.btn_calificar} onClick={handleCancelReserva}>Cancelar</button>
+        <li onClick={handleCancelReserva}>Cancelar</li>
     )
 } 
 export default CancelReserva

@@ -7,11 +7,14 @@ import CancelReserva from "./CancelReserva";
 
 const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id, descripcion}) => {
   const [showFeedback, setShowFeedback] = useState(false);
+  const [showInfo, setShowInfo] = useState(false)
 
   const handleToggleFeedback = () => {
     setShowFeedback(!showFeedback);
   };
-
+  const handleToggleInfo = () => {
+    setShowInfo(!showInfo);
+  };
   return (
     <div className={styles.container_cardReserva}>
       <div className={styles.container_card}>
@@ -20,17 +23,18 @@ const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id, descripcion})
         <div className={styles.container_text}>
           <div className={styles.info}>
             <h2 className={styles.title_card}>{titulo}</h2>
-            <p>{categoria}</p>
+            {showInfo && <p>{categoria}</p>}
             <p className={styles.p_fecha}><BiCalendarAlt />{fecha}</p>
             <p className={styles.p_fecha}><BiAlarm />{hora}hs</p>
-            <p>{descripcion}</p>
+            {showInfo &&  <p>{descripcion}</p>}
           </div>
 
           <div className={styles.container_end}>
-            <button className={styles.btn_calificar} onClick={handleToggleFeedback}>
-              {showFeedback ? "Ocultar" : "Feedback"}
-            </button>
-            <CancelReserva id={id}/>
+            <nav>
+              <li onClick={handleToggleInfo}> {showInfo ? 'Ocultar detalles': 'Ver detalles' } </li>
+              <li onClick={handleToggleFeedback}> {showFeedback ? "Ocultar feedback" : "Ver feedback"}</li>
+              <CancelReserva id={id}/>
+            </nav>
           </div>
         </div>
       </div>
