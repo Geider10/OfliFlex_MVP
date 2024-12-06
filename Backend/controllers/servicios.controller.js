@@ -1,6 +1,6 @@
 const {servicioModel} = require('../models/servicios')
 const {userModel} = require('../models/user')
-
+const {reservaModel} = require('../models/reservas')
 const crearServicio = async (req, res) => {
   try {
     const { titulo, descripcion, imagen, fecha, hora, categoria, userId } = req.body;
@@ -34,28 +34,6 @@ const crearServicio = async (req, res) => {
     res.json({error : e})
   }
 };
-
-// const crearServicio = async (req, res) => {
-//     const { titulo, descripcion, imagen, categoria, hora, rangoFechas } = req.body
-
-//     if (!titulo || !descripcion || !imagen || !categoria || !hora) {
-//         return res.status(400).json({ error: 'Se requiere titulo, descripcion, imagen, categoria y hora para crear un servicio' })
-//     }
-
-//     let fechasDisponibles = [];
-//     if (rangoFechas && rangoFechas.inicio && rangoFechas.fin) {
-//         fechasDisponibles = generarFechas(rangoFechas.inicio, rangoFechas.fin);
-//     }
-
-//     console.log(fechasDisponibles);
-
-//     // Crear servicio nuevo:
-//     const nuevoServicio = new servicioModel({ titulo: titulo, descripcion: descripcion, imagen: imagen, categoria: categoria, hora: hora, fechasDisponibles: fechasDisponibles })
-//     await nuevoServicio.save();
-
-//     // Devuelvo el nuevo servicio:
-//     res.status(201).json(nuevoServicio)
-// }
 
 const obtenerServicios = async (req, res) => {
     try {
@@ -106,14 +84,20 @@ const eliminarServicio = async (req, res) => {
     try {
       const servicioId = req.params.servicioId
       const servicio = await servicioModel.findOne({servicioID: servicioId})
-      console.log(servicio);
-      if (!servicio) return res.status(404).json({error : 'servicio not found'})
+      if (!servicio) return res.status(404).json({error : 'servicio-propetario not found'})
+      //eliminar servicio de la lista desde el propietario y eliminar servicio
       const propietario = await userModel.findOne({_id : servicio.userId})
       if (!propietario) return res.status(404).json({error : 'propietario not found'})
       const filterServicios = propietario.listaServicios.filter( s => s.servicioID != servicioId)
-      console.log(filterServicios);
       await userModel.updateOne({_id : servicio.userId} , {$set : {listaServicios : filterServicios}})
       const servicioAEliminar = await servicioModel.deleteOne({ servicioID: servicioId }).exec()
+      //eliminar servicio desde el usuario
+      const serviceUser = await reservaModel.findOne({servicioID : servicioId})
+      if (!serviceUser) return res.status(404).json({error : 'servicio-usuario not found'})
+      const user = await userModel.findOne({_id : serviceUser.usuarioId})
+      const filterReservas = user.listaReservas.filter(r => r.servicioID != servicioId)
+      console.log(filterReservas);
+      await userModel.updateOne({_id : serviceUser.usuarioId}, {$set:{listaReservas : filterReservas}})
       if (servicioAEliminar.deletedCount == 0) return res.status(404).json({ error: 'no se elimino dicho servicio' })
       res.status(200).json({ success: 'servicioModel eliminado correctamente' })
     } catch (e) {

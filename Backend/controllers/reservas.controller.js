@@ -57,7 +57,7 @@ const feedBack = async (req, res) => {
 
     res.json(reservaRealizada);
   } catch (error) {
-    res.json({error: e})
+    res.json({error: error})
   }
 };
 
