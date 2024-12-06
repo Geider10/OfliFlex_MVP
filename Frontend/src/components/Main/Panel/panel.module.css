@@ -198,12 +198,6 @@ input[type="file"] {
   width: 100%;
 }
 
-.container_card{
-  display: flex;
-  width: 100%;
-}
-
-
 .img_reserva {
   width: 120px;
   height: 100px;
@@ -391,4 +385,32 @@ input[type="file"] {
   border-radius: .2rem;
   border: none;
   margin-top: 1rem;
+}
+/* menu .dropdown */
+.dropdown {
+  position: relative;
+}
+
+.dropdown_menu {
+  list-style: none;
+  position: absolute;
+  top: 0; 
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: #25282A;
+  border-radius: 0.5rem;
+  white-space: nowrap; /* Evita que el contenido se quiebre en varias líneas */
+}
+
+.link {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-weight: 100;
+  font-size: 1rem;
+  cursor: pointer;
 }

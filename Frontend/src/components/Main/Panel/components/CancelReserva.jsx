@@ -58,7 +58,7 @@ const CancelReserva = ({id}) => {
     }
 
     return (
-        <li onClick={handleCancelReserva}>Cancelar</li>
+        <li onClick={handleCancelReserva} className={styles.link}>Cancelar</li>
     )
 } 
 export default CancelReserva
