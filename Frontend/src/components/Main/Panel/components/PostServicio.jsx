@@ -15,7 +15,7 @@ const ServicioForm = () => {
 
         const form = new FormData(e.target);
         const formData = {
-            usuarioId: usuario._id,
+            userId: usuario._id,
             titulo: form.get('titulo'),
             descripcion: form.get('descripcion'),
             imagen: form.get('imagen'),
@@ -23,11 +23,10 @@ const ServicioForm = () => {
             fecha: form.get('fecha'),
             hora: form.get('hora'),
             categoria: form.get('categoria')
-            
         };
 
         try {
-            const response = await axios.post('http://localhost:3000/servicios', formData,
+            await axios.post('http://localhost:3000/servicios', formData,
                 {
                     headers: {
                         Authorization: 'Bearer ' + authToken

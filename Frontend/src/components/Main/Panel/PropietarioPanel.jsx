@@ -22,6 +22,7 @@ const PropietarioPanel = () => {
         {serviciosCreados.map((servicio,index) => (
           <CardServicio
           key={index}
+          id={servicio.servicioID}
           imagen={servicio.imagen}
           titulo={servicio.titulo}
           fecha={servicio.fecha}
