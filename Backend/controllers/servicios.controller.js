@@ -112,13 +112,14 @@ const eliminarServicio = async (req, res) => {
       await userModel.updateOne({_id : servicio.userId} , {$set : {listaServicios : filterServicios}})
       const servicioAEliminar = await servicioModel.deleteOne({ servicioID: servicioId }).exec()
       //eliminar servicio desde el usuario
-      const serviceUser = await reservaModel.findOne({servicioID : servicioId})
-      if (!serviceUser) return res.status(404).json({error : 'servicio-usuario not found'})
-      const user = await userModel.findOne({_id : serviceUser.usuarioId})
-      const filterReservas = user.listaReservas.filter(r => r.servicioID != servicioId)
-      console.log(filterReservas);
-      await userModel.updateOne({_id : serviceUser.usuarioId}, {$set:{listaReservas : filterReservas}})
-      if (servicioAEliminar.deletedCount == 0) return res.status(404).json({ error: 'no se elimino dicho servicio' })
+      if(!servicio.disponible){
+        const serviceUser = await reservaModel.findOne({servicioID : servicioId})
+        if (!serviceUser) return res.status(404).json({error : 'servicio-usuario not found'})
+        const user = await userModel.findOne({_id : serviceUser.usuarioId})
+        const filterReservas = user.listaReservas.filter(r => r.servicioID != servicioId)
+        await userModel.updateOne({_id : serviceUser.usuarioId}, {$set:{listaReservas : filterReservas}})
+        if (servicioAEliminar.deletedCount == 0) return res.status(404).json({ error: 'no se elimino dicho servicio' })
+      }
       res.status(200).json({ success: 'servicioModel eliminado correctamente' })
     } catch (e) {
       res.json({error : e})
