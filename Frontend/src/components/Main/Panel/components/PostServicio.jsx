@@ -1,69 +1,100 @@
-// ServicioForm.js
-import React from 'react';
-import { useContext, useRef } from 'react';
+import { useContext, useEffect } from 'react';
 import styles from '../panel.module.css'
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
 import { ToastContainer } from "react-toastify";
+import {useForm} from 'react-hook-form';
 
-const ServicioForm = () => {
+const ServicioForm = ({edit,service,setEdit}) => {
     const { authToken, usuario, msgSuccess} = useContext(Context);
-    const formRef = useRef(null)
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const form = new FormData(e.target);
-        const formData = {
-            userId: usuario._id,
-            titulo: form.get('titulo'),
-            descripcion: form.get('descripcion'),
-            imagen: form.get('imagen'),
-            disponible: true,
-            fecha: form.get('fecha'),
-            hora: form.get('hora'),
-            categoria: form.get('categoria')
-        };
-
+    const {register, handleSubmit, reset, setValue } = useForm()
+    useEffect(()=>{
+        if(edit){
+            setValue('imagen',service.imagen)
+            setValue('titulo',service.titulo)
+            setValue('fecha',service.fecha)
+            setValue('hora',service.hora)
+            setValue('categoria',service.categoria)
+            setValue('descripcion',service.descripcion)
+        }
+    },[edit])
+    const onSubmit = async (formData) => {
+        const newData = {...formData, userId : usuario._id}
         try {
-            await axios.post('http://localhost:3000/servicios', formData,
-                {
-                    headers: {
-                        Authorization: 'Bearer ' + authToken
+            if(edit){
+                await axios.put(`http://localhost:3000/servicios/${service.id}`,formData,
+                    {
+                        headers:{
+                            Authorization : `Bearer ${authToken}`
+                        }
                     }
-                }
-            );
-            msgSuccess('Se creo un servicio con éxito')
-            formRef.current.reset()            
+                )
+                msgSuccess('Se edito servicio con éxito')
+                setEdit(false)
+            }
+            else{
+                await axios.post('http://localhost:3000/servicios', newData,
+                    {
+                        headers: {
+                            Authorization: 'Bearer ' + authToken
+                        }
+                    }
+                );
+                msgSuccess('Se creo un servicio con éxito')
+            }
+            reset()
         } catch (error) {
             console.error('Error al crear el servicio:', error);
         }
     };
-
     return (
-            <form onSubmit={handleSubmit} className={styles.form} ref={formRef}>
+            <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.card_info}>
                     <div className={styles.img_servicio}>
-                        <input type="text" name="imagen" placeholder='Imágen' required className={styles.input_img} />
+                        <input type="text"placeholder='Imágen' className={styles.input_img}
+                            {...register('imagen',{
+                                required : {value: true, message:'Imagen es requerida'}
+                            })}
+                        />
                     </div>
                     <div className={styles.inputs_textContainer}>
                         <div className={styles.inputs_conjunto}>
                             <div className={styles.div_inputs}> 
-                                <input type="text" name="titulo" placeholder='Título' required className={styles.inputs} />
+                                <input type="text" placeholder='Título' className={styles.inputs}
+                                    {...register('titulo',{
+                                        required : {value : true, message: 'Tittulo es requerido'},
+                                        minLength : {value : 3, message : 'Ingresar minimo 3 digitos'}
+                                    })}
+                                />
                             </div>
                             <div  className={styles.div_inputs}>
-                                <input type="text" name="fecha" placeholder='Fecha (DD/MM/AAAA)' required className={styles.inputs} />
+                                <input type="text"  placeholder='Fecha (DD/MM/AAAA)'  className={styles.inputs}
+                                    {...register('fecha',{
+                                        required : {value: true, message:'Fecha es requerida'}
+                                    })}
+                                />
                             </div>
                             <div  className={styles.div_inputs}>
-                                <input type="text" name="hora" placeholder='Hora (HH:MM-HH:MM)' required className={styles.inputs} />
+                                <input type="text" placeholder='Hora (HH:MM-HH:MM)' className={styles.inputs} 
+                                    {...register('hora',{
+                                        required : {value: true, message:'Hora es requerida'}
+                                    })}
+                                />
                             </div>
 
                         </div>
                         <div>
-                            <input type="text" name="descripcion" placeholder='Descripción' required className={styles.inputs} />
+                            <input type="text" placeholder='Descripción' className={styles.inputs}
+                                {...register('descripcion',{
+                                    required : {value : true, message : 'Descripcion es requerida'},
+                                    minLength : {value : 10, message : 'Mínimo 10 digitos'}
+                                })}
+                            />
                         </div>
                         <div>
-                            <select name="categoria" className={styles.inputs}>
+                            <select className={styles.inputs} 
+                                {...register('categoria')}
+                            >
                                 <option value='' disabled>Categoría</option>
                                 <option value="Oficinas">Oficinas</option>
                                 <option value="Salas">Salas</option>

@@ -21,7 +21,7 @@ const CancelServicio = ({id}) =>{
     }
 
     return (
-        <li onClick={handleDeleteServicio} className={styles.link}>Cancelar</li>
+        <li onClick={handleDeleteServicio} className={styles.link}>Eliminar</li>
     )
 }
 export default CancelServicio

@@ -3,14 +3,26 @@ import { BiAlarm } from "react-icons/bi";
 import { BiCalendarAlt } from "react-icons/bi";
 import {useState} from 'react';
 import CancelServicio from './CancelServicio';
-const CardServicio = ({imagen, titulo, fecha, hora, categoria, id}) => {
+const CardServicio = ({imagen, titulo, fecha, hora, categoria,descripcion, id,edit,service}) => {
   
   const [dropDown, setDropDown] = useState(false)
   const handleDropDown = () =>{
     setDropDown(!dropDown)
   }
   const handleEdit = () =>{
-    console.log('edit success');
+    const contentService = {
+      'id' : id,
+      'titulo' : titulo,
+      'fecha' : fecha,
+      'hora' : hora,
+      'imagen' : imagen,
+      'categoria' : categoria,
+      'descripcion' : descripcion
+    }
+    service(contentService)
+    edit(true)
+    setDropDown(false)
+
   }
   return (
     <div className={styles.container_cardReserva}>
@@ -24,7 +36,7 @@ const CardServicio = ({imagen, titulo, fecha, hora, categoria, id}) => {
         </div>
       </div>
       <div className={styles.dropdown}>
-              <p onClick={handleDropDown}>pp</p>
+              <p onClick={handleDropDown}>P</p>
               {dropDown && 
               <nav className={styles.dropdown_menu}>
                 <li onClick={handleEdit} className={styles.link}>Editar</li>
