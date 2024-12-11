@@ -67,6 +67,8 @@ const editarServicio = async (req,res) => {
   try {
     const id = req.params.servicioId
     const bodyService = req.body
+    console.log(bodyService);
+    //edit service in db
     const service = await servicioModel.findOne({servicioID : id})
     if (!service) res.json({error : 'service not found'})
     for (const key in service) {
@@ -75,6 +77,24 @@ const editarServicio = async (req,res) => {
       }
     }
     await service.save()
+    //edit service from user-owner
+    const user = await userModel.findOne({_id : service.userId})
+    if(!user) res.json({error : 'user no found'})
+    user.listaServicios = user.listaServicios.map(sr =>{
+      if(sr.servicioID == id){
+        return {
+          ...sr,
+           titulo : bodyService.titulo,
+           descripcion : bodyService.descripcion,
+           imagen : bodyService.imagen,
+           fecha : bodyService.fecha,
+           hora : bodyService.hora,
+           categoria : bodyService.categoria
+          }
+      }
+      return sr
+    }) 
+    await user.save()
     res.json({succes : 'req put service', payload : service})
   } catch (error) {
     res.json({error: error})

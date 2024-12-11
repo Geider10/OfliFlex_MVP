@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
     telefono: { type: Number, required: true,
         //quito el atributo de unico ya que no todos los usuarios llegan al modelo desde los servicios de FB y G con este dato y se pueden repetir como null
         /*  unique: true */},
-    rol : {type:String,default:"usuario"},
+    rol : {type:String,default:"propietario"},
     usuarioId: {
         type: mongoose.Schema.Types.ObjectId,
         index: true,
