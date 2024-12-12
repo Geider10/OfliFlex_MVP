@@ -4,6 +4,7 @@ import { BiAlarm } from "react-icons/bi";
 import { BiCalendarAlt } from "react-icons/bi";
 import Feedback from "./feedback";
 import CancelReserva from "./CancelReserva";
+import { FaEllipsisVertical } from "react-icons/fa6";
 
 const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id, descripcion}) => {
   const [showFeedback, setShowFeedback] = useState(false);
@@ -34,7 +35,7 @@ const CardReserva = ({ imagen, titulo, fecha, hora, categoria, id, descripcion})
           </div>
 
           <div className={styles.dropdown}>
-            <p className={''} onClick={handleDropDown}>pp</p>
+            <FaEllipsisVertical onClick={handleDropDown} />
             {dropDown && 
               <nav className={styles.dropdown_menu}>
                 <li onClick={handleToggleInfo} className={styles.link}> {showInfo ? 'Ocultar detalles': 'Ver detalles' } </li>

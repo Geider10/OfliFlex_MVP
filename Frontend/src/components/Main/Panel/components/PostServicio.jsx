@@ -29,7 +29,7 @@ const ServicioForm = ({edit,service,setEdit}) => {
                         }
                     }
                 )
-                msgSuccess('Se edito servicio con éxito')
+                msgSuccess('Se edito el servicio con éxito')
                 setEdit(false)
             }
             else{
