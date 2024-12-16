@@ -40,8 +40,8 @@ const ServicioDetail = () => {
               <p>{servicio.descripcion}</p>
             </div>
             <div className={styles.center_row}>
-              <p className={styles.fecha_hora}>{servicio.fecha}</p>
-              <p className={styles.fecha_hora}>{servicio.hora}</p>
+              <span className={styles.fecha_hora}>{servicio.fecha}</span>
+              <span className={styles.fecha_hora}>{servicio.hora}</span>
             </div>
             <form onSubmit={handleSubmit}>
               <Stack>
