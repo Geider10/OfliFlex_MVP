@@ -5,7 +5,17 @@ import OptionsUser from "./OptionsUser";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const { loggedIn, closeSession } = useContext(Context);
+  const { loggedIn} = useContext(Context);
+  const [dropDown, setDropDown] = useState(false)
+  const handleDropDown = () =>{
+    setDropDown(!dropDown)
+  }
+  const closeDropDown = () =>{
+    if(dropDown){
+      setDropDown(false)
+    }
+  }
+
   const [show, setShow] = useState(true);
   const controlNavbar = () => {
     if (window.scrollY > 250) {
@@ -25,7 +35,7 @@ const Header = () => {
   return (
     <div className={`${styles.container} ${!show ? styles.hidden : ""}`}>
       <div className={styles.container_menu}>
-        <Link to="/">
+        <Link to="/" onClick={closeDropDown}>
           <img className={styles.logo} src="/Logotipo.png" alt="logo" />
         </Link>
         <ul className={styles.container_ul}>
@@ -34,6 +44,7 @@ const Header = () => {
               isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
             }
             to="/"
+            onClick = {closeDropDown}
           >
             Inicio
           </NavLink>
@@ -42,6 +53,7 @@ const Header = () => {
               isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
             }
             to="/servicios/oficinas"
+            onClick = {closeDropDown}
           >
             Servicios
           </NavLink>
@@ -50,6 +62,7 @@ const Header = () => {
               isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
             }
             to="/galeria"
+            onClick = {closeDropDown}
           >
             Galería
           </NavLink>
@@ -58,13 +71,14 @@ const Header = () => {
               isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
             }
             to="/contacto"
+            onClick = {closeDropDown}
           >
             Contacto
           </NavLink>
         </ul>
 
         {loggedIn ? (
-          <OptionsUser handleLogout={closeSession} />
+          <OptionsUser dropDown={dropDown} closeDropDown = {closeDropDown} handleDropDown = {handleDropDown}/>
         ) : (
           <Link to="/ingresar">
             <button className={styles.btn}>Ingresar</button>
