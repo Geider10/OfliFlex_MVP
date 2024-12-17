@@ -5,9 +5,8 @@ import OptionsUser from "./OptionsUser";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const { loggedIn, setLoggedIn, navigate } = useContext(Context);
+  const { loggedIn, closeSession } = useContext(Context);
   const [show, setShow] = useState(true);
-
   const controlNavbar = () => {
     if (window.scrollY > 250) {
       setShow(false);
@@ -22,15 +21,6 @@ const Header = () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, []);
-
-  const handleLogout = () => {
-    // Lógica para cerrar sesión
-    setTimeout(()=>{
-      localStorage.removeItem("token");
-      navigate("/");
-      setLoggedIn(false);
-    },2000)
-  };
 
   return (
     <div className={`${styles.container} ${!show ? styles.hidden : ""}`}>
@@ -74,7 +64,7 @@ const Header = () => {
         </ul>
 
         {loggedIn ? (
-          <OptionsUser handleLogout={handleLogout} />
+          <OptionsUser handleLogout={closeSession} />
         ) : (
           <Link to="/ingresar">
             <button className={styles.btn}>Ingresar</button>

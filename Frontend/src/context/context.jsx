@@ -20,7 +20,6 @@ export const ContextProvider = ({ children }) => {
 
   // Guarda alguno de los 2 token;
   const authToken = urlToken || savedToken;
-
   useEffect(() => {
     if (authToken) {
       setToken(authToken);
@@ -50,6 +49,7 @@ export const ContextProvider = ({ children }) => {
       });
   }, [serviciosFiltrados]);
 
+
   //TRAIGO LA API DE USER/:ID
   const [usuario, setUsuario] = useState([]);
 
@@ -72,25 +72,32 @@ export const ContextProvider = ({ children }) => {
           setUsuario(response.data);
         } else {
           console.error("Token o usuario ID no disponibles");
+          closeSession()
         }
       } catch (error) {
         console.error("Error al obtener usuario:", error);
+        closeSession()
       }
     };
 
     if (authToken && usuarioId) {
       fetchUsuario();
     }
+    
   }, [authToken, usuarioId, usuario.listaReservas]);
 
-  //Instancia para Redirecciones
+  const closeSession = () => {
+    navigate("/");
+    localStorage.removeItem('token')
+    setLoggedIn(false);
+  }
+  
   const navigate = useNavigate();
 
   //LOGICA BUSCADOR/FILTRO
   const [busqueda, setBusqueda] = useState("");
   const [selectedFecha, setSelectedFecha] = useState("");
   const [selectedHora, setSelectedHora] = useState("");
-  //const [serviciosFiltrados, setServiciosFiltrados] = useState([]);
 
   const handleSelectedFecha = (e) => {
     const selectedFecha = e.target.value;
@@ -211,7 +218,8 @@ export const ContextProvider = ({ children }) => {
         servicios,
         usuario,
         clearFilters,
-        authToken
+        authToken,
+        closeSession
       }}
     >
       {children}
