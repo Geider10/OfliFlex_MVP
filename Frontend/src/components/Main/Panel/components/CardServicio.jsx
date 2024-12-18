@@ -24,6 +24,11 @@ const CardServicio = ({imagen, titulo, fecha, hora, categoria,descripcion, id,ed
     edit(true)
     setDropDown(false)
 
+    // Mueve la barra vertical al inicio de la página con suavizado
+       window.scrollTo({
+        top: 0, // Posición en píxeles desde la parte superior
+        behavior: 'smooth', // Suavizado del desplazamiento
+      });
   }
   return (
     <div className={styles.container_cardReserva}>

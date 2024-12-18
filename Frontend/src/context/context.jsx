@@ -72,7 +72,7 @@ export const ContextProvider = ({ children }) => {
           setUsuario(response.data);
         } else {
           console.error("Token o usuario ID no disponibles");
-          closeSession()
+          closeSession()//se cierra la session cuando el token se expira
         }
       } catch (error) {
         console.error("Error al obtener usuario:", error);

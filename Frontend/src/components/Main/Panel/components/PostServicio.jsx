@@ -104,7 +104,7 @@ const ServicioForm = ({edit,service,setEdit}) => {
                     </div>
                 </div>
                 <div className={styles.btn_container}>
-                    <button type="submit" className={styles.btn}>Crear</button>
+                    <button type="submit" className={styles.btn}>{!edit ?'Crear' : 'Editar' }</button>
                 </div>
                 <ToastContainer/>
             </form>

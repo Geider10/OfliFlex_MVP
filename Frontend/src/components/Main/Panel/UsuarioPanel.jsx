@@ -7,14 +7,12 @@ import { parse, isAfter, isBefore} from "date-fns";
 const UsuarioPanel = () => {
 const { usuario, servicios } = useContext(Context);
 const [filtro, setFiltro] = useState('activas');
-const [reservas, setReservas] = useState(usuario.listaReservas);
+const [reservas, setReservas] = useState([])
 const [reservasFiltradas, setReservasFiltradas] = useState([]); // Para almacenar las reservas filtradas
 
-
-const aplicarFiltro = (nuevoFiltro = filtro) => {
+const filtroFechaReservas = (nuevoFiltro = filtro) => {
   const hoy = new Date();
-
-  const reservasFiltradas = reservas.filter((reserva) => {
+  const reservasData = reservas.filter((reserva) => {
     if (!reserva.fecha) {
       console.log(`La reserva con ID ${reserva.id || "desconocido"} no tiene fecha.`);
       return false;
@@ -22,30 +20,28 @@ const aplicarFiltro = (nuevoFiltro = filtro) => {
 
     // Parsear la fecha al formato correcto y aplicar filtro
     const fechaReserva = parse(reserva.fecha.trim(), "dd/MM/yyyy", new Date());
-    if (nuevoFiltro === "activas") {
+    if (nuevoFiltro == "activas") {
       return isAfter(fechaReserva, hoy); // Fecha futura
-    } else if (nuevoFiltro === "finalizadas") {
+    } else if (nuevoFiltro == "finalizadas") {
       return isBefore(fechaReserva, hoy); // Fecha pasada
     }
 
     return true;
   });
-  setReservasFiltradas(reservasFiltradas);
+  setReservasFiltradas(reservasData);
 };
 
   useEffect(() => {
-    if (reservas && servicios) {
-      const data = reservas.map((reserva) => {
-        // Buscar el servicio correspondiente a la reserva
-        const servicio = servicios.find(s => s.servicioID.toString() == reserva.servicioID.toString());
-        return servicio // Añadir el servicio a data
-      })
-      setReservas(data);
-      aplicarFiltro(filtro);
-    } else {
-      console.error("Reservas o servicios no disponibles");
-    }
-  }, [usuario,servicios]);
+    if(!usuario.listaReservas) return 
+    const dataUser = usuario.listaReservas
+    const data = dataUser.map((reserva) => {
+      // Buscar el servicio correspondiente a la reserva
+      const servicio = servicios.find(s => s.servicioID.toString() == reserva.servicioID.toString());
+      return servicio // Añadir el servicio a data
+    })
+    setReservas(data)
+    filtroFechaReservas(filtro);
+  }, [usuario.listaReservas,usuario.listaServicios,servicios]);
   
   return (
     <div className={styles.container_user_panel}>
@@ -55,7 +51,7 @@ const aplicarFiltro = (nuevoFiltro = filtro) => {
           value={filtro}
           onChange={(e) => {
             setFiltro(e.target.value); 
-            aplicarFiltro(e.target.value); 
+            filtroFechaReservas(e.target.value); 
           }}
           className={styles.select}
         >
