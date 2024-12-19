@@ -219,7 +219,7 @@ input[type="file"] {
 }
 
 .info {
-  display: flex;
+  display: flex;   
   flex-direction: column;
   justify-content: center;
   align-items: start;
@@ -412,5 +412,20 @@ input[type="file"] {
   color: #FFFFFF;
   font-weight: 100;
   font-size: 1rem;
+  cursor: pointer;
+}
+.feedback_title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.feedback_title_edit{
+  background-color: #4CAF50;
+  color: #25282A;
+  border-radius: 10px;
+  padding: 3px;
+  height: 23px;
+  width: 23px;
   cursor: pointer;
 }

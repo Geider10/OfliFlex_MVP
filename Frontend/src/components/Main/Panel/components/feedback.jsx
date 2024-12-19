@@ -1,14 +1,12 @@
 import styles from "../panel.module.css";
-import { TiStar } from "react-icons/ti";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Context from "../../../../context/context.jsx";
-
+import { FaPenToSquare } from "react-icons/fa6";
 const feedback = ({ id }) => {
   const { authToken} = useContext(Context);
   const [feedback, setFeedback] = useState("");
   const [reserva, setReserva] = useState(null);
-  const [idRes, setIdRes] = useState('')
   const [editFeedback, setEditFeedback] = useState(false)
   useEffect(() => {
     const getReservas = async () => {
@@ -18,8 +16,9 @@ const feedback = ({ id }) => {
             Authorization: `Bearer ${authToken}`
           }}
         )
-        const idReserva = reservas.data.find(r => r.servicioID == id)
-        setIdRes(idReserva.reservaId)
+        const newReserva = reservas.data.find(r => r.servicioID == id)
+        setReserva(newReserva);
+        setFeedback(newReserva.feedback || "");
       } catch (error) {
         console.error("Error al obtener las reservas:", error);
       }
@@ -28,60 +27,23 @@ const feedback = ({ id }) => {
     getReservas()
   }, [id, authToken]);
 
-  useEffect(()=>{
-    if (!idRes) return; // Evita ejecutar si `idRes` no está definido
-    const getReservaId = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/reservas/${idRes}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        setReserva(response.data);
-        setFeedback(response.data.feedback || "");
-      } catch (error) {
-        console.error("Error al obtener la reserva:", error);
-      }
-    };
-    getReservaId();
-
-  },[idRes,authToken])
-
-  const handleSubmit = async () => {
+  const handleSubmit = async (statusEdit, valueFeedback) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/reservas/${idRes}`,
-        { feedback },
+        `http://localhost:3000/reservas/${reserva.reservaId}`,
+        { feedback : valueFeedback },
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
         }
       );
-      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || feedback }));
-      setEditFeedback(true)
+      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || valueFeedback }));
+      setEditFeedback(statusEdit)
     } catch (error) {
       console.error("Error al enviar el feedback:", error);
     }
   };
-  const handleEdit =async () =>{
-    try {
-        const response = await axios.put(
-        `http://localhost:3000/reservas/${idRes}`,
-        { feedback : ''},
-        {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        }
-      );
-      console.log(response);
-      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || '' }));
-      setEditFeedback(false)
-    } catch (error) {
-      console.error("Error al enviar el feedback:", error);
-    }
-  }
 
   if (!reserva) {
     return <div>Cargando reserva...</div>;
@@ -90,9 +52,11 @@ const feedback = ({ id }) => {
   return (
     
     <div className={styles.container_feedback}>
-      <h3 className={styles.title_card}> Feedback</h3>
-        
-      {(editFeedback || reserva.feedback) && <button onClick={handleEdit}>Editar</button>}
+      <div className={styles.feedback_title}>
+      <h3 className={styles.title_card}>Feedback</h3>
+         {(editFeedback || reserva.feedback) && <FaPenToSquare onClick={()=> handleSubmit(false, '')} className={styles.feedback_title_edit}/>}
+      </div>
+      
       {reserva.feedback ? (
          <p>{reserva.feedback}</p>
       ) : (
@@ -105,7 +69,7 @@ const feedback = ({ id }) => {
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
             />
-            <button className={styles.btn_calificar} onClick={handleSubmit}>Enviar</button>
+            <button className={styles.btn_calificar} onClick={()=>handleSubmit(true,feedback)}>Enviar</button>
         </div>
       )}
     </div>
