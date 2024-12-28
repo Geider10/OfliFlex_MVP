@@ -1,5 +1,7 @@
 const {userModel} = require('../models/user'); 
 const jwt = require('jsonwebtoken')
+const passport = require('passport')
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const signup = async (req,res) => {
     const data = req.body
@@ -29,4 +31,36 @@ const login = async (req, res) => {
         res.status(500).json({error: e.message})
     }
 }
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: 'http://localhost:3000/auth/google/callback'
+},  async (accessToken, refreshToken, profile, done) => {
+        console.log(profile); // data del user logueado por google
+        //verifico que exista el usuario de google en la db
+        let user = await userModel.findOne({googleId : profile.id})
+        if(user) return done(null, user, {message: 'Usuario logueado por googgleId'})
+        
+        //verifico si el usuario que se inteta registrar ya existe con su mail en la db
+        user = await userModel.findOne({email: profile.emails[0].value})
+        if(user) {
+            user.googleId = profile.id
+            await user.save()
+            return done(null, user, {message: 'Usuario logueado por email'})
+        }
+
+        //si no sucede ninguno de los 2 casos creo el usuario nuevo en la db
+        const newUser = {
+            googleId: profile.id,
+            email: profile.emails[0].value,
+            nombre: profile.name.givenName,
+            apellido: profile.name.familyName,
+            telefono: profile.phoneNumbers ? profile.phoneNumbers[0].value : 1122334455,
+            edad : 22
+        }
+        await userModel.create(newUser)
+        return done(null, newUser, {message: 'Usuario logueado correctamente'})
+    })
+)
 module.exports = {signup, login}
