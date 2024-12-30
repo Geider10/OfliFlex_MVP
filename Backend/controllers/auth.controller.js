@@ -2,6 +2,7 @@ const {userModel} = require('../models/user');
 const jwt = require('jsonwebtoken')
 const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const {GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, JWT_SECRET_KEY} = require('../config')
 
 const signup = async (req,res) => {
     const data = req.body
@@ -24,7 +25,7 @@ const login = async (req, res) => {
         const validate = await user.isValidPassword(password) //retorna true o false
         if(!validate) return res.status(400).json({message: 'Incorrect password'})
         const bodyToken = {_id: user._id, email: user.email}
-        const token = jwt.sign({user: bodyToken}, process.env.JWT_SECRET_KEY, {expiresIn: '1h'}) 
+        const token = jwt.sign({user: bodyToken}, JWT_SECRET_KEY, {expiresIn: '1h'}) 
         res.status(200).json({token})
     }
     catch(e){
@@ -33,8 +34,8 @@ const login = async (req, res) => {
 }
 
 passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
     callbackURL: 'http://localhost:3000/auth/google/callback'
 },  async (accessToken, refreshToken, profile, done) => {
         console.log(profile); // data del user logueado por google
