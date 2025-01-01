@@ -8,12 +8,12 @@ const serviciosRoutes = require("./routes/servicios.routes");
 const authRoutes = require("./routes/auth.routes");
 const uploadRoutes = require("./routes/upload.routes"); // Importa las rutas de upload
 const mailingRouter = require("./routes/mailing.routes")
-const {PORT,MONGO_URI} = require("./config");
+const {PORT,MONGO_URI, FRONTEND_URL} = require("./config");
 const mongoose = require("mongoose");
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+  origin: [FRONTEND_URL],
   optionsSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
