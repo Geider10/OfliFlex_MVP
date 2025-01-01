@@ -2,7 +2,7 @@ import styles from './ServicioDetail.module.css'
 import { useParams } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import Context from '../../../context/context.jsx';
-import PostDataDetail from './componentes/PostDataDetail.js';
+import ReservarServicio from './componentes/ReservarSercioDetail.jsx';
 import { BtnBack } from './componentes/BtnBack.jsx';
 import { MsjExito } from './componentes/MsjExito.jsx';
 import { Button, Stack } from '@chakra-ui/react'
@@ -17,7 +17,7 @@ const ServicioDetail = () => {
   const [reservaId, setReservaId] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
-  const { handleSubmit } = PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLoading });
+  const { handleSubmit } = ReservarServicio({ servicio, usuario, setIsSuccess, setReservaId, setIsLoading });
 
   return (
     <>

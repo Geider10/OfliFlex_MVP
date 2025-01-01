@@ -1,8 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 //logica para hacer crear una reserva, POST
-function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLoading }) {
+function ReservarSercioDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLoading }) {
 
   const { authToken, msgError } = useContext(Context);
 
@@ -29,7 +32,7 @@ function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLo
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    axios.post("http://127.0.0.1:3000/reservas", postData, {
+    axios.post(`${BACKEND_URL}/reservas`, postData, {
       headers: {
         authorization: 'Bearer ' + authToken
       }
@@ -53,5 +56,5 @@ function PostDataDetail({ servicio, usuario, setIsSuccess, setReservaId, setIsLo
   return ({ handleSubmit })
 }
 
-export default PostDataDetail;
+export default ReservarSercioDetail;
 

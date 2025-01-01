@@ -6,6 +6,8 @@ import Context from "../../../context/context.jsx";
 import { ToastContainer } from "react-toastify";
 import { Skeleton } from "@chakra-ui/react";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const Contacto = () => {
   const { msgError, msgSuccess } = useContext(Context);
   const {
@@ -20,7 +22,7 @@ const Contacto = () => {
     try {
       setLoadingSent(true);
       await axios
-        .post("http://localhost:3000/sent-email", data)
+        .post(`${BACKEND_URL}/sent-email`, data)
         .then((res) => msgSuccess("Mensaje enviado"))
         .then((res) => setLoadingSent(false))
         .then((res) => reset());

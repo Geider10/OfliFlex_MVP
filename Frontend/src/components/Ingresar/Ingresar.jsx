@@ -3,21 +3,16 @@ import Iniciar_sesion from "./Iniciar_sesion.jsx";
 import Registro from "./Registro.jsx";
 import { useContext, useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { SiFacebook } from "react-icons/si";
-import { FaApple } from "react-icons/fa";
 import Context from '../../context/context.jsx';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 function Ingresar() {
   const { handleRegistro, handleLogin, login, loginRef } = useContext(Context);
 
   const handleGoogleLogin = async () => {
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = `${BACKEND_URL}/auth/google`;
   }
-
-  const handleFacebookLogin = async () => {
-    window.location.href = 'http://localhost:3000/auth/facebook';
-  }
-
   useEffect(() => {
     if (loginRef.current) {
       loginRef.current.classList.add("active");

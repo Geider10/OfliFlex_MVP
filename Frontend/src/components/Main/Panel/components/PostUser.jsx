@@ -4,6 +4,8 @@ import context from '../../../../context/context.jsx';
 import axios from 'axios';
 import {ToastContainer} from 'react-toastify';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const PostUser = ({btnEdit}) =>{
     const { authToken,usuario,msgSuccess} = useContext(context)
     const form = useRef(null)
@@ -19,7 +21,7 @@ const PostUser = ({btnEdit}) =>{
             telefono : formu.get('telefono')
         }
         try {
-            await axios.put(`http://localhost:3000/user/${usuario._id}`,formData,
+            await axios.put(`${BACKEND_URL}/user/${usuario._id}`,formData,
                 {
                     headers: {
                         Authorization: 'Bearer ' + authToken

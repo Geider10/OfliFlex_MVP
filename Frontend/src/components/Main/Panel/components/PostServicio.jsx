@@ -5,6 +5,8 @@ import Context from "../../../../context/context.jsx";
 import { ToastContainer } from "react-toastify";
 import {useForm} from 'react-hook-form';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const ServicioForm = ({edit,service,setEdit}) => {
     const { authToken, usuario, msgSuccess} = useContext(Context);
     const {register, handleSubmit, reset, setValue } = useForm()
@@ -22,7 +24,7 @@ const ServicioForm = ({edit,service,setEdit}) => {
         const newData = {...formData, userId : usuario._id}
         try {
             if(edit){
-                await axios.put(`http://localhost:3000/servicios/${service.id}`,formData,
+                await axios.put(`${BACKEND_URL}/servicios/${service.id}`,formData,
                     {
                         headers:{
                             Authorization : `Bearer ${authToken}`
@@ -33,7 +35,7 @@ const ServicioForm = ({edit,service,setEdit}) => {
                 setEdit(false)
             }
             else{
-                await axios.post('http://localhost:3000/servicios', newData,
+                await axios.post(`${BACKEND_URL}/servicios`, newData,
                     {
                         headers: {
                             Authorization: 'Bearer ' + authToken

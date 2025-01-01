@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useJwt } from "react-jwt";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const Context = createContext();
 export const ContextProvider = ({ children }) => {
-  
   //LOGICA MANIPULACION DE ESTADOS DE LOGGIN Y TOKEN
   const savedToken = localStorage.getItem("token");
 
@@ -40,7 +40,7 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3000/servicios")
+      .get(`${BACKEND_URL}/servicios`)	
       .then((response) => {
         setServicios(response.data);
       })
@@ -62,7 +62,7 @@ export const ContextProvider = ({ children }) => {
       try {
         if (authToken && usuarioId) {
           const response = await axios.get(
-            `http://127.0.0.1:3000/user/${usuarioId}`,
+            `${BACKEND_URL}/user/${usuarioId}`,
             {
               headers: {
                 Authorization: authToken,

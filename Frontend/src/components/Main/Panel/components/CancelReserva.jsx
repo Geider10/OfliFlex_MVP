@@ -3,6 +3,8 @@ import {useContext,useState,useEffect} from 'react';
 import Context from '../../../../context/context';
 import styles from "../panel.module.css";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const CancelReserva = ({id}) => {
     const {authToken} = useContext(Context)
     const [reserva, setReserva] = useState(null);
@@ -10,7 +12,7 @@ const CancelReserva = ({id}) => {
     useEffect(() => {
       const getReservas = async () => {
         try {
-          const reservas = await axios.get('http://localhost:3000/reservas',
+          const reservas = await axios.get(`${BACKEND_URL}/reservas`,
             {headers : {
               Authorization: `Bearer ${authToken}`
             }}
@@ -27,7 +29,7 @@ const CancelReserva = ({id}) => {
 
     const handleCancelReserva = async () => {
         try { 
-          await axios.put(`http://localhost:3000/reservas/cancel/${reserva.reservaId}`,
+          await axios.put(`${BACKEND_URL}/reservas/cancel/${reserva.reservaId}`,
             {headers:{
               Authorization : `Bearer ${authToken}`
             }}

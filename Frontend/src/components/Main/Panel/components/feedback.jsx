@@ -3,6 +3,9 @@ import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Context from "../../../../context/context.jsx";
 import { FaPenToSquare } from "react-icons/fa6";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const feedback = ({ id }) => {
   const { authToken} = useContext(Context);
   const [feedback, setFeedback] = useState("");
@@ -11,7 +14,7 @@ const feedback = ({ id }) => {
   useEffect(() => {
     const getReservas = async () => {
       try {
-        const reservas = await axios.get('http://localhost:3000/reservas',
+        const reservas = await axios.get(`${BACKEND_URL}/reservas`,
           {headers : {
             Authorization: `Bearer ${authToken}`
           }}
@@ -30,7 +33,7 @@ const feedback = ({ id }) => {
   const handleSubmit = async (statusEdit, valueFeedback) => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/reservas/${reserva.reservaId}`,
+        `${BACKEND_URL}/reservas/${reserva.reservaId}`,
         { feedback : valueFeedback },
         {
           headers: {

@@ -1,10 +1,11 @@
 import styles from './Ingresar.module.css';
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import { NavLink } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Context from '../../context/context.jsx';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const Iniciar_sesion = () => {
   const { msgError, msgSuccess, setLoggedIn, navigate } = useContext(Context);
@@ -15,7 +16,7 @@ const Iniciar_sesion = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', { email, password });
+      const response = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
       setLoggedIn(true);
