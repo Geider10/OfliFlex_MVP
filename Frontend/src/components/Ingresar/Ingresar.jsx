@@ -38,7 +38,7 @@ function Ingresar() {
         </div>
 
         <div className={styles.content_img}>
-          <img src="img-register.png" alt="equipo desarrollando" className={styles.img} />
+          <img src="img-register.webp" alt="equipo desarrollando" className={styles.img} />
         </div>
 
       </div>

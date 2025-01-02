@@ -52,7 +52,7 @@ const ImageUploader = () => {
         </div>
       ) : (
         <div className={styles.container_img_perfil}>
-          <img src="/user-profile-unloggin.png" alt="Null avatar" className={styles.img_user} />
+          <img src="/user-profile-unloggin.webp" alt="Null avatar" className={styles.img_user} />
         </div>
       )}
 
