@@ -1,3 +1,4 @@
+//variables de desarrollo
 const PORT = process.env.PORT || '3000'
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Yoel10:yoel2024@dbtesting.lrttm0z.mongodb.net/Ofiflex?retryWrites=true&w=majority&appName=DBTesting'
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'la_contraseña_mas_segura_y_fiable_27/10/2024'
