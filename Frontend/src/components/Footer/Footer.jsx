@@ -7,7 +7,7 @@ import { RiTwitterXLine } from "react-icons/ri";
 const Footer = () => {
   return (
     <div className={styles.container}>
-      <Link className={styles.container_logo} to={'/'}><img src="/footer_logotipo.png" alt="" className={styles.logo} /></Link>
+      <Link className={styles.container_logo} to={'/'}><img src="/footer_logotipo.webp" alt="" className={styles.logo} /></Link>
       <ul className={styles.div}>
         {/* <NavLink className={styles.links} to={'/'}>Inicio</NavLink> */}
         <Link className={styles.links} to={'/'}>Inicio</Link>

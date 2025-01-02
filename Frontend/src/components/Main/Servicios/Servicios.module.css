@@ -102,13 +102,13 @@
   margin: 10px 0px 20px 0px;
 }
 .banner_oficinas{
-  background-image: url("/banner-oficinas.png");
+  background-image: url("/banner-oficinas.webp");
 }
 .banner_salas{
-  background-image: url("/banner-salas.png");
+  background-image: url("/banner-salas.webp");
 }
 .banner_eventos{
-  background-image: url("/banner-eventos.png");
+  background-image: url("/banner-eventos.webp");
 }
 
 .title_categoria{

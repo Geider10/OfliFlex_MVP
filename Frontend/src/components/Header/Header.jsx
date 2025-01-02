@@ -36,7 +36,7 @@ const Header = () => {
     <div className={`${styles.container} ${!show ? styles.hidden : ""}`}>
       <div className={styles.container_menu}>
         <Link to="/" onClick={closeDropDown}>
-          <img className={styles.logo} src="/Logotipo.png" alt="logo" />
+          <img className={styles.logo} src="/Logotipo.webp" alt="logo" />
         </Link>
         <ul className={styles.container_ul}>
           <NavLink
