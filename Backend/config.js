@@ -5,5 +5,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || 'la_contraseña_mas_segura_
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '233276774937-dlpho3it1g2oq9kbefe5u7grk9te3sth.apps.googleusercontent.com'
 const GOOGLE_CLIENT_SECRET=  process.env.GOOGLE_CLIENT_SECRET || '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'
 const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173"
+const EMAIL_ADMIN = process.env.EMAIL_ADMIN || 'd0m1de24@gmail.com'
+const PASSWORD_ADMIN = process.env.PASSWORD_ADMIN || 'abpb kbtf ffdl nqvr'
 
-module.exports = {PORT, MONGO_URI, JWT_SECRET_KEY, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FRONTEND_URL}
+module.exports = {PORT, MONGO_URI, JWT_SECRET_KEY, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, FRONTEND_URL, EMAIL_ADMIN, PASSWORD_ADMIN}
