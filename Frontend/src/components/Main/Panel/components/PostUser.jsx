@@ -1,25 +1,24 @@
-import {useContext,useRef} from 'react'
+import {useContext,useEffect} from 'react'
 import style from '../panel.module.css';
 import context from '../../../../context/context.jsx';
 import axios from 'axios';
 import {ToastContainer} from 'react-toastify';
+import {useForm} from 'react-hook-form';    
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const PostUser = ({btnEdit}) =>{
     const { authToken,usuario,msgSuccess} = useContext(context)
-    const form = useRef(null)
-    const handleSubmit = async (e) => {
-        btnEdit()
-        e.preventDefault()
+    const {register, handleSubmit, reset, setValue } = useForm()   
+    useEffect(()=>{
+        setValue('nombre',usuario.nombre)
+        setValue('apellido',usuario.apellido)
+        setValue('edad',usuario.edad)
+        setValue('telefono',usuario.telefono)        
+    },[])
+    const onSubmit = async (formData) => {
+        btnEdit()//false
 
-        const formu = new FormData(e.target)
-        const formData = {
-            nombre : formu.get('nombre'),
-            apellido : formu.get('apellido'),
-            edad : formu.get('edad'),
-            telefono : formu.get('telefono')
-        }
         try {
             await axios.put(`${BACKEND_URL}/user/${usuario._id}`,formData,
                 {
@@ -29,25 +28,29 @@ const PostUser = ({btnEdit}) =>{
                 }
             )
             msgSuccess('Se editaron los datos con éxito')
-            form.current.reset()
+            reset()
         } catch (error) {
             console.error('Error al editar los datos', error);
         }
     }
     return(
-        <form onSubmit={handleSubmit} ref={form} className={style.form}>
+        <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
             <div className={style.inputs_textContainer}> 
                 <div className={style.div_inputs}>
-                    <input type="text" name = 'nombre' className={style.inputs} placeholder="Nombre*" required/>
+                    <input type="text" className={style.inputs} placeholder="Nombre*" {
+                        ...register('nombre')}/>
                 </div>
                 <div className={style.div_inputs}>
-                    <input type="text" name = 'apellido' className={style.inputs} placeholder="Apellido*" required/>
+                    <input type="text" className={style.inputs} placeholder="Apellido*" {
+                        ...register('apellido')}/>
                 </div> 
                 <div className={style.div_inputs}>
-                    <input type="number" name = 'edad' className={style.inputs} placeholder="Edad*" required/>
+                    <input type="number" className={style.inputs} placeholder="Edad*" {
+                        ...register('edad')}/>
                 </div> 
                 <div className={style.div_inputs}>
-                    <input type="number" name = 'telefono' className={style.inputs} placeholder="Teléfono*" required/>
+                    <input type="number" className={style.inputs} placeholder="Teléfono*" {
+                        ...register('telefono')}/>
                 </div>
             </div>
             <div className={style.btn_container}>
