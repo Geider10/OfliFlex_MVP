@@ -1,24 +1,12 @@
 const express = require('express');
-const multer = require('multer');
 const {userModel} = require('../models/user');
 const verifyToken = require('../middlewares/authMiddleware');
 const checkRole = require('../middlewares/checkRoleMiddleware');
+const uploadImg = require('../middlewares/uploadMiddleware');
 const uploadRouter = express.Router();
 
-const upload = multer({
-  storage: multer.memoryStorage(), // Usar almacenamiento en memoria para obtener el buffer
-  limits: {
-    fileSize: 3000000 // 3 megas
-  },
-  fileFilter: (req, file, callback) => {
-    if (!file.originalname.match(/\.(png|jpeg|jpg)$/)) {
-      return callback(new Error('Por favor subir una foto en formato PNG, JPEG ó JPG'));
-    }
-    callback(null, true);
-  }
-});
 
-uploadRouter.post('/upload', verifyToken, checkRole(["usuario", "propietario"]), upload.single('avatar'), async (req, res) => {
+uploadRouter.post('/upload', verifyToken, checkRole(["usuario", "propietario"]), uploadImg.single('avatar'), async (req, res) => {
   try {
     const file = req.file;
     const usuarioId = req.userId;
@@ -36,5 +24,4 @@ uploadRouter.post('/upload', verifyToken, checkRole(["usuario", "propietario"]),
     res.status(500).send({ error: error.message });
   }
 });
-
 module.exports = uploadRouter;

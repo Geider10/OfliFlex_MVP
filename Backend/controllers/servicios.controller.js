@@ -3,9 +3,9 @@ const {userModel} = require('../models/user')
 const {reservaModel} = require('../models/reservas')
 const crearServicio = async (req, res) => {
   try {
-    const { titulo, descripcion, imagen, fecha, hora, categoria, userId } = req.body;
+    const { titulo, descripcion, fecha, hora, categoria, userId } = req.body;
 
-    if (!titulo || !descripcion || !imagen || !fecha || !hora || !categoria || !userId) {
+    if (!titulo || !descripcion || !fecha || !hora || !categoria || !userId) {
       return res.status(400).json({
         error:"Se requiere el _id del usuario, titulo, descripcion, imagen, fecha, hora y categoria para crear un servicio",
       });
