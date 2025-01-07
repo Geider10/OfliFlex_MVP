@@ -37,7 +37,14 @@
   justify-content: center;
   overflow: hidden;
 }
-
+.container_img_servicio {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
 .img_user {
   width: 100%;
   height: 100%;
@@ -354,8 +361,7 @@ input[type="file"] {
 }
 
 .input_img{
-  height: 100%;
-  background-color: rgb(232, 232, 232);
+  background-color: rgb(44, 205, 65);
   text-align: center;
   border: 1px solid rgba(0, 0, 0, 0.107);
   

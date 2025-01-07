@@ -23,9 +23,11 @@ const Contacto = () => {
       setLoadingSent(true);
       await axios
         .post(`${BACKEND_URL}/sent-email`, data)
-        .then((res) => msgSuccess("Mensaje enviado"))
-        .then((res) => setLoadingSent(false))
-        .then((res) => reset());
+        .then((res) =>{
+          msgSuccess("Mensaje enviado")
+          setLoadingSent(false)
+          reset()
+        } )
     } catch (error) {
       console.error("Error al enviar mensaje:", error.response?.data || error.message);
       msgError("Error al enviar mensaje");
@@ -41,7 +43,7 @@ const Contacto = () => {
         <p className={styles.subtitle}>a continuación y estaremos encantados de asistirte.</p>
       </div>
 
-      <form method="POST" onSubmit={handleSubmit(onSubmit)} className={styles.content_form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.content_form}>
         <div className={styles.container_datos}>
           <div className={styles.content}>
             <label htmlFor="nombre" className={styles.label}>

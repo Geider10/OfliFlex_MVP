@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState,useRef } from 'react';
 import styles from '../panel.module.css'
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
@@ -10,6 +10,8 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 const ServicioForm = ({edit,service,setEdit}) => {
     const { authToken, usuario, msgSuccess} = useContext(Context);
     const {register, handleSubmit, reset, setValue } = useForm()
+    const [preview, setPreview] = useState(null)
+
     useEffect(()=>{
         if(edit){
             setValue('imagen',service.imagen)
@@ -49,11 +51,30 @@ const ServicioForm = ({edit,service,setEdit}) => {
             console.error('Error al crear el servicio:', error);
         }
     };
+    const convertToBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result); // Resultado en base64
+          reader.onerror = (error) => reject(error);
+        });
+      };
+    
+      // Manejar el cambio del archivo
+    const handleFileChange = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await convertToBase64(file);
+        setPreview(base64); // Actualiza la vista previa con el base64
+      };
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.card_info}>
                     <div className={styles.img_servicio}>
-                        <input type="text"placeholder='Imágen' className={styles.input_img}
+                        <div className={styles.container_img_servicio}>
+                            <img src={preview ? preview : '/user-profile-unloggin.webp'} alt="vista previa de la imagen" className={styles.img_user}/>
+                        </div>
+                        <label htmlFor="file"  className={styles.input_img} >Cargar imagen</label>
+                        <input id='file' type="file"  accept="image/*"  onChange={handleFileChange} style={{display:'none'}}
                             {...register('imagen',{
                                 required : {value: true, message:'Imagen es requerida'}
                             })}
