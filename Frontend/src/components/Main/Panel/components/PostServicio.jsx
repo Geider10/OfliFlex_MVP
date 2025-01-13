@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState,useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from '../panel.module.css'
 import axios from 'axios';
 import Context from "../../../../context/context.jsx";
@@ -10,26 +10,30 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 const ServicioForm = ({edit,service,setEdit}) => {
     const { authToken, usuario, msgSuccess} = useContext(Context);
     const {register, handleSubmit, reset, setValue } = useForm()
-    const [preview, setPreview] = useState(null)
+    const [preview, setPreview] = useState(null);
+    const [file, setFile] = useState(null);
 
     useEffect(()=>{
         if(edit){
-            setValue('imagen',service.imagen)
             setValue('titulo',service.titulo)
             setValue('fecha',service.fecha)
             setValue('hora',service.hora)
             setValue('categoria',service.categoria)
             setValue('descripcion',service.descripcion)
+            setPreview(service.imagen)
         }
     },[edit])
     const onSubmit = async (formData) => {
-        const newData = {...formData, userId : usuario._id}
+        const newData = {...formData, userId : usuario._id, avatar: file}
         try {
             if(edit){
-                await axios.put(`${BACKEND_URL}/servicios/${service.id}`,formData,
+                const editData = {...formData,avatar:file}
+                console.log(editData)
+                await axios.put(`${BACKEND_URL}/servicios/${service.id}`,editData,
                     {
                         headers:{
-                            Authorization : `Bearer ${authToken}`
+                            Authorization : `Bearer ${authToken}`,
+                            'Content-Type': 'multipart/form-data'
                         }
                     }
                 )
@@ -37,16 +41,19 @@ const ServicioForm = ({edit,service,setEdit}) => {
                 setEdit(false)
             }
             else{
+                console.log(newData);
                 await axios.post(`${BACKEND_URL}/servicios`, newData,
                     {
                         headers: {
-                            Authorization: 'Bearer ' + authToken
+                            Authorization: 'Bearer ' + authToken,
+                            'Content-Type': 'multipart/form-data'
                         }
                     }
                 );
                 msgSuccess('Se creo un servicio con éxito')
             }
             reset()
+            setPreview(null)
         } catch (error) {
             console.error('Error al crear el servicio:', error);
         }
@@ -65,20 +72,17 @@ const ServicioForm = ({edit,service,setEdit}) => {
         const file = e.target.files[0];
         const base64 = await convertToBase64(file);
         setPreview(base64); // Actualiza la vista previa con el base64
+        setFile(file);
       };
     return (
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                 <div className={styles.card_info}>
                     <div className={styles.img_servicio}>
-                        <div className={styles.container_img_servicio}>
-                            <img src={preview ? preview : '/user-profile-unloggin.webp'} alt="vista previa de la imagen" className={styles.img_user}/>
+                        <div className={styles.container_img_servicio}>     
+                            <img src={preview ? preview: '/user-profile-unloggin.webp'} alt="vista previa de la imagen" className={styles.img_user}/>
                         </div>
-                        <label htmlFor="file"  className={styles.input_img} >Cargar imagen</label>
-                        <input id='file' type="file"  accept="image/*"  onChange={handleFileChange} style={{display:'none'}}
-                            {...register('imagen',{
-                                required : {value: true, message:'Imagen es requerida'}
-                            })}
-                        />
+                        <label htmlFor="file-img"  className={styles.input_img} >Cargar imagen</label>
+                        <input id='file-img' type="file"  accept="image/*" style={{display:'none'}} onChange={handleFileChange} />
                     </div>
                     <div className={styles.inputs_textContainer}>
                         <div className={styles.inputs_conjunto}>

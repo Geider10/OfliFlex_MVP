@@ -24,6 +24,7 @@ const ImageUploader = () => {
     }
 
     try {
+      console.log(data);
       const response = await axios.post(`${BACKEND_URL}/upload`, data, {
         headers: {
           'Authorization': 'Bearer ' + authToken,
@@ -31,7 +32,6 @@ const ImageUploader = () => {
         }
       });
       setImageUrl(response.data.imagenUrl);
-      console.log('Respuesta:', response.data);
     } catch (error) {
       console.error('Error al enviar la solicitud:', error);
     }
