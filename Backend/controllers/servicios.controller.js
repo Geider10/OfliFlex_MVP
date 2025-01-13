@@ -3,9 +3,9 @@ const {userModel} = require('../models/user')
 const {reservaModel} = require('../models/reservas')
 const crearServicio = async (req, res) => {
   try {
-    const { titulo, descripcion, fecha, hora, categoria, userId } = req.body;
-
-    if (!titulo || !descripcion || !fecha || !hora || !categoria || !userId) {
+    const { titulo, descripcion, fecha, hora, categoria, userId} = req.body;
+    const myFile = req.file
+    if (!titulo || !descripcion || !fecha || !hora || !categoria || !userId || !myFile ) {
       return res.status(400).json({
         error:"Se requiere el _id del usuario, titulo, descripcion, imagen, fecha, hora y categoria para crear un servicio",
       });
@@ -13,15 +13,20 @@ const crearServicio = async (req, res) => {
     // Buscar el propietario que crea el servicio
     const usuarioAEditar = await userModel.findOne({ _id: userId });
     if (!usuarioAEditar) return res.status(400).json({ error: 'No se encontró al usuario' });
+    // Convertir img a base64 para almacenar en MongoDB
+    const base64Image = myFile.buffer.toString('base64');
+    const imagenUrl = `data:${myFile.mimetype};base64,${base64Image}`;
+
     const nuevoServicio = new servicioModel({
       userId : userId,
       titulo: titulo,
       descripcion: descripcion,
-      imagen: imagen,
+      imagen: imagenUrl,
       fecha: fecha,
       hora: hora,
       categoria: categoria,
     });
+    console.log(nuevoServicio);
     await nuevoServicio.save();
 
     // Agrego el nuevo servicio a la lista del propietario:
@@ -66,9 +71,14 @@ const obtenerServicioPorId = async (req, res) => {
 const editarServicio = async (req,res) => {
   try {
     const id = req.params.servicioId
-    const bodyService = req.body
+    const body= req.body 
+    const myFile = req.file
+    // Convertir img a base64 para almacenar en MongoDB
+    const base64Image = myFile.buffer.toString('base64');
+    const imagenUrl = `data:${myFile.mimetype};base64,${base64Image}`;
+    const bodyService = {...body, imagen : imagenUrl} 
     console.log(bodyService);
-    //edit service in db
+    // edit service in db
     const service = await servicioModel.findOne({servicioID : id})
     if (!service) res.json({error : 'service not found'})
     for (const key in service) {
@@ -77,7 +87,7 @@ const editarServicio = async (req,res) => {
       }
     }
     await service.save()
-    //edit service from user-owner
+    //edit list-service from the owner-user
     const user = await userModel.findOne({_id : service.userId})
     if(!user) res.json({error : 'user no found'})
     user.listaServicios = user.listaServicios.map(sr =>{
@@ -95,7 +105,7 @@ const editarServicio = async (req,res) => {
       return sr
     }) 
     await user.save()
-    res.json({succes : 'req put service', payload : service})
+    res.json({succes : 'req put service', payload : 'service'})
   } catch (error) {
     res.json({error: error})
   }

@@ -5,12 +5,12 @@ const checkRole = require('../middlewares/checkRoleMiddleware');
 const uploadImg = require('../middlewares/uploadMiddleware');
 const uploadRouter = express.Router();
 
-
 uploadRouter.post('/upload', verifyToken, checkRole(["usuario", "propietario"]), uploadImg.single('avatar'), async (req, res) => {
   try {
     const file = req.file;
+    console.log(file);
     const usuarioId = req.userId;
-
+    console.log(usuarioId);
     if (!file) return res.status(400).send({ error: 'No hay un archivo subido' });
     // Convertir img a base64 para almacenar en MongoDB
     const base64Image = file.buffer.toString('base64');
