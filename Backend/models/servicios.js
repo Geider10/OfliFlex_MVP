@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const ServicioSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
+    required :true
   },
   servicioID: {
     type: mongoose.Schema.Types.ObjectId,
@@ -52,4 +53,5 @@ const ServicioSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Servicio', ServicioSchema);
+const servicioModel = mongoose.model('services', ServicioSchema);
+module.exports = {servicioModel}

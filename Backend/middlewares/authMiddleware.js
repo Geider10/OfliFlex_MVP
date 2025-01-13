@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken')
-
+const {JWT_SECRET_KEY} = require('../config')
 function verifyToken(req, res, next) {
-    const token = req.header('Authorization')?.replace('Bearer ','')
-    if (!token) return res.status(401).json({ error: 'Acceso denegado' })
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const token = req.header('Authorization')?.replace('Bearer ','')
+        if (!token) return res.status(401).json({ error: 'No hay token' })
+        const decoded = jwt.verify(token, JWT_SECRET_KEY);
         req.userId = decoded.user._id;
         next()
     } catch (error) {
-        res.status(401).json({ error: 'Token inválido' })
+        res.status(401).json({ error: 'Token inválido by auth' })
     }
 }
 

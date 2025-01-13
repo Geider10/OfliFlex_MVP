@@ -6,7 +6,7 @@ const ReservaSchema = new mongoose.Schema({
     index: true,
     auto: true,
   },
-  servicioId: {
+  servicioID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
@@ -14,11 +14,11 @@ const ReservaSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },
-  usuarioReserva: { type: String, require: true },
-  servicioReservado: { type: String, require: true },
-  fechaCreacion: { type: mongoose.Schema.Types.Date, auto: true },
-  estado: { type: String, enum: ["activa", "realizada"], default: "activa" },
-  feedback: { type: String, require: false, default: "" },
+  usuarioReserva: { type: String, required: true },
+  servicioReservado: { type: String, required: true },
+  fecha : {type: String, required : true},
+  feedback: { type: String, required: false, default: "" },
 });
 
-module.exports = mongoose.model("Reserva", ReservaSchema);
+const reservaModel = mongoose.model("bookings", ReservaSchema);
+module.exports = {reservaModel}

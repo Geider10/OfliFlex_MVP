@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useJwt } from "react-jwt";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const Context = createContext();
 export const ContextProvider = ({ children }) => {
-  
   //LOGICA MANIPULACION DE ESTADOS DE LOGGIN Y TOKEN
   const savedToken = localStorage.getItem("token");
 
@@ -20,7 +20,6 @@ export const ContextProvider = ({ children }) => {
 
   // Guarda alguno de los 2 token;
   const authToken = urlToken || savedToken;
-
   useEffect(() => {
     if (authToken) {
       setToken(authToken);
@@ -41,7 +40,7 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:3000/servicios")
+      .get(`${BACKEND_URL}/servicios`)	
       .then((response) => {
         setServicios(response.data);
       })
@@ -49,6 +48,7 @@ export const ContextProvider = ({ children }) => {
         console.error("Error al obtener servicios:", error);
       });
   }, [serviciosFiltrados]);
+
 
   //TRAIGO LA API DE USER/:ID
   const [usuario, setUsuario] = useState([]);
@@ -62,7 +62,7 @@ export const ContextProvider = ({ children }) => {
       try {
         if (authToken && usuarioId) {
           const response = await axios.get(
-            `http://127.0.0.1:3000/user/${usuarioId}`,
+            `${BACKEND_URL}/user/${usuarioId}`,
             {
               headers: {
                 Authorization: authToken,
@@ -72,25 +72,32 @@ export const ContextProvider = ({ children }) => {
           setUsuario(response.data);
         } else {
           console.error("Token o usuario ID no disponibles");
+          closeSession()//se cierra la session cuando el token se expira
         }
       } catch (error) {
         console.error("Error al obtener usuario:", error);
+        closeSession()
       }
     };
 
     if (authToken && usuarioId) {
       fetchUsuario();
     }
+    
   }, [authToken, usuarioId, usuario.listaReservas]);
 
-  //Instancia para Redirecciones
+  const closeSession = () => {
+    navigate("/");
+    localStorage.removeItem('token')
+    setLoggedIn(false);
+  }
+  
   const navigate = useNavigate();
 
   //LOGICA BUSCADOR/FILTRO
   const [busqueda, setBusqueda] = useState("");
   const [selectedFecha, setSelectedFecha] = useState("");
   const [selectedHora, setSelectedHora] = useState("");
-  //const [serviciosFiltrados, setServiciosFiltrados] = useState([]);
 
   const handleSelectedFecha = (e) => {
     const selectedFecha = e.target.value;
@@ -211,7 +218,8 @@ export const ContextProvider = ({ children }) => {
         servicios,
         usuario,
         clearFilters,
-        authToken
+        authToken,
+        closeSession
       }}
     >
       {children}

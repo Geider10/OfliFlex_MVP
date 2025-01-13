@@ -1,10 +1,11 @@
 import styles from "./Ingresar.module.css";
 import { useForm } from "react-hook-form";
-import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import Context from '../../context/context.jsx';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 function Registro() {
   const { msgError, msgSuccess, setLogin, loginRef, handleLogin } = useContext(Context);
@@ -14,7 +15,7 @@ function Registro() {
   // Envíamos los datos del formulario al backend para el registro, y si el registro es exitoso, establece el estado registered en true para redirigir al usuario
   const onSubmit = async (data) => {
     try {
-      await axios.post("http://localhost:3000/auth/register", data)
+      await axios.post(`${BACKEND_URL}/auth/register`, data)
       setRegistered(true);
       msgSuccess("Registro exitoso");
       handleLogin();
@@ -24,12 +25,11 @@ function Registro() {
     }
   };
 
-  // Si registered es true, redirigir al Home ('/')
   // Redirijo al usuario a la vista de iniciar sesión, cambio el estado de renderizado setLogin
   if (registered) {
     setTimeout(() => {
       setLogin(true);
-    }, 1500);
+    }, 2000);
     loginRef.current.classList.add("active");
   }
 
@@ -145,11 +145,8 @@ function Registro() {
         </div>
       
 
-        <button onClick={onSubmit} type="submit" className={styles.btn}>
-          Crear cuenta
-        </button>
-
-        <NavLink to="/IniciarSesion" className={styles.parrafo}>¿Ya tienes una cuenta? Inicia sesión aquí</NavLink>
+        <button type="submit" className={styles.btn}> Crear cuenta </button>
+        <p className={styles.parrafo}>¿No tienes una cuenta? Presiona iniciar sesión</p>
       </form>
       <ToastContainer />
     </div>

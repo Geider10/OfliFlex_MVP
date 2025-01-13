@@ -1,7 +1,6 @@
 import styles from './Inicio.module.css';
 import resenas from '../../../data/resenas.json';
-import servicios from '../../../data/serviciostype.json';
-import { Servicio } from './Servicio';
+import Servicios from '../Servicios/Servicios';
 import { Resena } from './Resena';
 import { NavLink } from 'react-router-dom'
 
@@ -16,23 +15,9 @@ const Inicio = () => {
       </div>
       {/* Servicios */}
       <div className={styles.container_servicios}>
-        <h2 className={styles.subtitle}>Espacios con soluciones modernas</h2>
-
-        <div className={styles.servicios}>
-          {servicios.map((item) => {
-            return (
-              <Servicio
-                key={item.id}
-                img={item.img}
-                name={item.nombre}
-                cantidad={item.cantidad}
-                categoria={item.categoria}
-              />
-            )
-          })}
-        </div>
-
-        <NavLink to={'/servicios'} className={styles.reservar_button}>Reservar</NavLink>
+        <h2 className={styles.subtitle}>Soluciones modernas</h2>
+        <Servicios/>
+        <NavLink to={'/servicios/oficinas'} className={styles.reservar_button}>Reservar</NavLink>
 
       </div>
       {/* Reseñas */}

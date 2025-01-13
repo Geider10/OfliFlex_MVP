@@ -12,37 +12,36 @@
   flex-direction: column;
   align-items: start;
   gap: 1rem;
-  max-width: 3rem;
-  text-align: start;
+  text-decoration: none;
+  list-style: none;
 }
 
 .container_logo{
   display: flex;
-  align-items: center;
-  height: 100%;
+  align-self: center;
+  height: 50px;
+  width: 100px;
 }
 
 .logo{
-  width: 5.3rem;
+  height: 100%;
+  width: 100%;
 }
 
 .links{
   text-decoration: none;
   list-style: none;
   color: #FFFFFF;
-  font-weight: 100;
-  font-size: 1.2rem;
+  transition: color 0.5s ease;
 }
-
 .links:hover{
   text-decoration: underline;
 }
 
 .div_icons{
   display: flex;
-  align-items: start;
+  align-self: center;
   gap: 1rem;
-  align-self: flex-start;
 }
 
 .icons{

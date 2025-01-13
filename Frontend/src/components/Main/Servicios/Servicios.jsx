@@ -32,7 +32,7 @@ const Servicios = () => {
           <img src="/servicios-eventos.webp" alt="presentacion de las oficinas" className={styles.cards_img} />
         </div>
         <div className={styles.cards_content}>
-          <h2 className={styles.cards_title}>Auditorios - Eventos</h2>
+          <h2 className={styles.cards_title}>Eventos</h2>
           <p className={styles.cards_parrafo}>Los salones para eventos están diseñado para grupos de mas de 20 personas, cuenta con un proyector de cine, conexión a internet y un equipo de sonido envolvente para garantizar una experiencia audiovisual de alta calidad.</p>
         </div>
       </NavLink>

@@ -11,27 +11,27 @@ const Galeria = () => {
         <div className="carousel-inner">
 
           <div className="carousel-item">
-            <img src="/eventos/evento3.png" className="d-block w-100" alt="Sala 3" />
+            <img src="/eventos/evento3.webp" className="d-block w-100" alt="Sala 3" />
           </div>
 
           <div className="carousel-item active">
-            <img src="/salas/sala1.png" className="d-block w-100" alt="Sala 1" />
+            <img src="/salas/sala1.webp" className="d-block w-100" alt="Sala 1" />
           </div>
 
           <div className="carousel-item">
-            <img src="/salas/sala2.png" className="d-block w-100" alt="Sala 2" />
+            <img src="/salas/sala2.webp" className="d-block w-100" alt="Sala 2" />
           </div>
 
           <div className="carousel-item">
-            <img src="/salas/sala3.png" className="d-block w-100" alt="Sala 3" />
+            <img src="/salas/sala3.webp" className="d-block w-100" alt="Sala 3" />
           </div>
 
           <div className="carousel-item">
-            <img src="/eventos/evento2.png" className="d-block w-100" alt="Sala 3" />
+            <img src="/eventos/evento2.webp" className="d-block w-100" alt="Sala 3" />
           </div>
 
           <div className="carousel-item">
-            <img src="/eventos/evento5.png" className="d-block w-100" alt="Sala 3" />
+            <img src="/eventos/evento5.webp" className="d-block w-100" alt="Sala 3" />
           </div>
         </div>
 

@@ -6,6 +6,8 @@ import Context from "../../../context/context.jsx";
 import { ToastContainer } from "react-toastify";
 import { Skeleton } from "@chakra-ui/react";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const Contacto = () => {
   const { msgError, msgSuccess } = useContext(Context);
   const {
@@ -20,10 +22,12 @@ const Contacto = () => {
     try {
       setLoadingSent(true);
       await axios
-        .post("http://localhost:3000/sent-email", data)
-        .then((res) => msgSuccess("Mensaje enviado"))
-        .then((res) => setLoadingSent(false))
-        .then((res) => reset());
+        .post(`${BACKEND_URL}/sent-email`, data)
+        .then((res) =>{
+          msgSuccess("Mensaje enviado")
+          setLoadingSent(false)
+          reset()
+        } )
     } catch (error) {
       console.error("Error al enviar mensaje:", error.response?.data || error.message);
       msgError("Error al enviar mensaje");
@@ -39,7 +43,7 @@ const Contacto = () => {
         <p className={styles.subtitle}>a continuación y estaremos encantados de asistirte.</p>
       </div>
 
-      <form method="POST" onSubmit={handleSubmit(onSubmit)} className={styles.content_form}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.content_form}>
         <div className={styles.container_datos}>
           <div className={styles.content}>
             <label htmlFor="nombre" className={styles.label}>

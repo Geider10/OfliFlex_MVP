@@ -1,0 +1,82 @@
+backend
+    *usuario
+        Editar datos personales e imagen pero no email. ✅
+        Crear logica para cancelar reserva ✅
+        Hacer el filtro de reservas'Activas' - 'Historial'. desde el front con el model de reserva ✅
+
+    *prepietarios 
+        Editar datos personales e imagen pero no email.✅
+        Editar los datos del servicio agregado ✅
+        Crear logica para elminar un servicio ✅
+
+frontend
+    *usuario
+        Armar un modal o desde la vista editar datos personales ✅
+        Testiar el filtro de reservas'Activas' - 'Historial'. ✅
+        Cambiar la vista cuando se realiza la reserva ✅
+        Agregar boton ver reservas✅ 
+        Crear un componente para la reservar y renderizarlo ✅ 
+        Boton para cancelar la reserva ✅
+        crear un dropdown para cancelar, ver detalles ✅
+        agregar el btn editar feedback ✅
+
+    *prepietarios 
+        Armar un modal o desde la vista editar datos personales  ✅
+        Boton para eliminar el servicio ✅
+        Usar el mismo form para editar el servicio ✅
+        Cambiar el diseño del servicio ✅
+
+general
+    *home
+        Cambiar el logo ✅
+        Cambiar la presentación de los servicios ✅
+        Boton cerrar sesion no sea brusco?✅
+        ajustar los estilos de la cardaDetail servicios ✅
+        modificar la vista del login/singup ✅
+        arreglar el footer cuando se hacer una reserva ✅
+        agregar incons al dropdown de servicios ✅
+        Se oculte el dropdown del perfil ✅
+        Ejecutar funccion logout cuando el token expira ✅
+        refrescar panel cuando se cancela una reserva ✅
+        Cuando tenemos un error el user cierra session ✅
+        Cambiar la autenticacion ✅
+        Pasar las img a webp ✅
+        Hacer Documentacion ✅
+        Hacer el deploy del frontend y el backend✅
+        Arreglar el envio de mail por la vista de contacto ✅
+        el prepietario pueda cargar imagenes en el formu ✅
+        Cargar los datos del user cuando se presiona editar ✅
+        Hacer el responsive del frontend ❌
+
+
+    *Footer
+        Poner las rutas en 'Oficinas', 'Salas', 'Eventos'. ✅
+	    Cambiar el logo ✅
+
+    *Header
+        Agregar animación a la ocultación del navbar. ✅
+    
+    *Contacto:
+        Agregar lo de 'Quiero ser propietario???'
+        Configurar bien lo del mail???
+
+    *plus
+        Usar reseñas reales en el home y agregar calificaciones ❌
+        Monetizar el sistema, mirar sistemas como booking ❌
+        Agregar los Skeleton a las pantallas y botones que corresponda ❌
+
+
+Consejos post desarrollo
+    * BACKEND
+        * Tener un solo ID por cada entidad 
+        * Aplicar buenas cardinalidades entre las entidades usando populate/FK
+        * Integrar autenticacion manual facil de escalar, jwt y estrategias de passport
+        * Trabajar con POO
+        * carpetas: index/utils => route/middleware => controller => dao => models
+
+    * FRONTEND
+        * Estilos con modulos
+        * Manejar por carpetas y vistas
+        * Realizar buena logica del context
+
+    

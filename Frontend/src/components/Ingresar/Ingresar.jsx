@@ -3,21 +3,16 @@ import Iniciar_sesion from "./Iniciar_sesion.jsx";
 import Registro from "./Registro.jsx";
 import { useContext, useEffect } from 'react';
 import { FcGoogle } from "react-icons/fc";
-import { SiFacebook } from "react-icons/si";
-import { FaApple } from "react-icons/fa";
 import Context from '../../context/context.jsx';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 function Ingresar() {
   const { handleRegistro, handleLogin, login, loginRef } = useContext(Context);
 
   const handleGoogleLogin = async () => {
-    window.location.href = 'http://localhost:3000/auth/google';
+    window.location.href = `${BACKEND_URL}/auth/google`;
   }
-
-  const handleFacebookLogin = async () => {
-    window.location.href = 'http://localhost:3000/auth/facebook';
-  }
-
   useEffect(() => {
     if (loginRef.current) {
       loginRef.current.classList.add("active");
@@ -35,15 +30,15 @@ function Ingresar() {
 
           <div className={styles.container_buttons}>
             <button onClick={handleGoogleLogin} className={styles.btn_services}><FcGoogle />Continuar con Google</button>
-            <button onClick={handleFacebookLogin} className={styles.btn_services}><SiFacebook />Continuar con Facebook</button>
-            <button className={styles.btn_services}><FaApple />Continuar con Apple</button>
+            {/* <button onClick={handleFacebookLogin} className={styles.btn_services}><SiFacebook />Continuar con Facebook</button> */}
+            {/* <button className={styles.btn_services}><FaApple />Continuar con Apple</button> */}
           </div>
 
           {login ? <Iniciar_sesion /> : <Registro />}
         </div>
 
         <div className={styles.content_img}>
-          <img src="img-register.png" alt="equipo desarrollando" className={styles.img} />
+          <img src="img-register.webp" alt="equipo desarrollando" className={styles.img} />
         </div>
 
       </div>

@@ -1,47 +1,48 @@
 import styles from "../panel.module.css";
-import { TiStar } from "react-icons/ti";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Context from "../../../../context/context.jsx";
+import { FaPenToSquare } from "react-icons/fa6";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const feedback = ({ id }) => {
-  const { authToken } = useContext(Context);
+  const { authToken} = useContext(Context);
   const [feedback, setFeedback] = useState("");
   const [reserva, setReserva] = useState(null);
-
+  const [editFeedback, setEditFeedback] = useState(false)
   useEffect(() => {
-    const fetchData = async () => {
+    const getReservas = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/reservas/${id}`, {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-          },
-        });
-        setReserva(response.data);
-        setFeedback(response.data.feedback || "");
+        const reservas = await axios.get(`${BACKEND_URL}/reservas`,
+          {headers : {
+            Authorization: `Bearer ${authToken}`
+          }}
+        )
+        const newReserva = reservas.data.find(r => r.servicioID == id)
+        setReserva(newReserva);
+        setFeedback(newReserva.feedback || "");
       } catch (error) {
-        console.error("Error al obtener la reserva:", error);
+        console.error("Error al obtener las reservas:", error);
       }
-    };
-
-    fetchData();
+    }
+   
+    getReservas()
   }, [id, authToken]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (statusEdit, valueFeedback) => {
     try {
-      const response = await axios.post(
-        `http://localhost:3000/reservas/${id}`,
-        { feedback },
+      const response = await axios.put(
+        `${BACKEND_URL}/reservas/${reserva.reservaId}`,
+        { feedback : valueFeedback },
         {
           headers: {
             Authorization: `Bearer ${authToken}`,
           },
         }
       );
-      console.log("Respuesta del servidor:", response.data);
-      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || feedback }));
+      setReserva((prev) => ({ ...prev, feedback: response.data.feedback || valueFeedback }));
+      setEditFeedback(statusEdit)
     } catch (error) {
       console.error("Error al enviar el feedback:", error);
     }
@@ -54,12 +55,13 @@ const feedback = ({ id }) => {
   return (
     
     <div className={styles.container_feedback}>
-      <h3 className={styles.title_card}>
-        <TiStar className={styles.star} /> Feedback:
-      </h3>
-     
+      <div className={styles.feedback_title}>
+      <h3 className={styles.title_card}>Feedback</h3>
+         {(editFeedback || reserva.feedback) && <FaPenToSquare onClick={()=> handleSubmit(false, '')} className={styles.feedback_title_edit}/>}
+      </div>
+      
       {reserva.feedback ? (
-        <div>{reserva.feedback}</div>
+         <p>{reserva.feedback}</p>
       ) : (
           <div className={styles.container_form}>
             <textarea
@@ -70,10 +72,7 @@ const feedback = ({ id }) => {
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
             />
-            <button className={styles.btn_calificar} onClick={handleSubmit}>
-              Enviar
-            </button>
-
+            <button className={styles.btn_calificar} onClick={()=>handleSubmit(true,feedback)}>Enviar</button>
         </div>
       )}
     </div>

@@ -3,6 +3,8 @@ import axios from 'axios';
 import Context from "../../../../context/context.jsx";
 import styles from "../panel.module.css"
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const ImageUploader = () => {
   const { authToken, usuarioId, usuario } = useContext(Context);
   const [imageUrl, setImageUrl] = useState(usuario.imagenUrl);
@@ -22,14 +24,14 @@ const ImageUploader = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/upload", data, {
+      console.log(data);
+      const response = await axios.post(`${BACKEND_URL}/upload`, data, {
         headers: {
           'Authorization': 'Bearer ' + authToken,
           'Content-Type': 'multipart/form-data'
         }
       });
       setImageUrl(response.data.imagenUrl);
-      console.log('Respuesta:', response.data);
     } catch (error) {
       console.error('Error al enviar la solicitud:', error);
     }
@@ -50,7 +52,7 @@ const ImageUploader = () => {
         </div>
       ) : (
         <div className={styles.container_img_perfil}>
-          <img src="/user-profile-unloggin.png" alt="Null avatar" className={styles.img_user} />
+          <img src="/user-profile-unloggin.webp" alt="Null avatar" className={styles.img_user} />
         </div>
       )}
 
@@ -59,9 +61,9 @@ const ImageUploader = () => {
         <h2 className={styles.text_name}>{usuario.nombre}</h2>
         <p>Perfil de {usuario.rol}</p>
         <label htmlFor="file-input" className={styles.file_label} onClick={handleUploadClick}>
-          Subir archivo
+          Cargar imagen
         </label>
-        <input id="file-input" type="file" ref={inputFile} style={{ display: 'none' }} onChange={handleFileChange} />
+        <input id="file-input" type="file" ref={inputFile} style={{ display: 'none' }} accept="image/*" onChange={handleFileChange} />
       </div>
 
       
@@ -70,54 +72,3 @@ const ImageUploader = () => {
 };
 
 export default ImageUploader;
-
-
-
-/* MÉTODO SIN MULTER PASANDO A BASE64 LAS IMAGENES:
-
-const [postImage, setPostImage] = useState({
-  myFile: "",
-});
-
-const url = "http://localhost:3000/uploads";
-
-const createImage = (newImage) => axios.post(url, newImage);
-
-const createPost = async (post) => {
-  try {
-    await createImage(post);
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  createPost(postImage);
-};
-
-const convertToBase64 = (file) => {
-  return new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(file);
-    fileReader.onload = () => {
-      resolve(fileReader.result);
-    };
-    fileReader.onerror = (error) => {
-      reject(error);
-    };
-  });
-};
-const handleFileUpload = async (e) => {
-  const file = e.target.files[0];
-  const base64 = await convertToBase64(file);
-  setPostImage({ ...postImage, myFile: base64 });
-};
-
-<div>
-  <form onSubmit={handleSubmit}>
-    <input type="file" label="Image" name="myFile" accept=".jpeg, .png, .jpg" onChange={(e) => handleFileUpload(e)} />
-
-    <button>Submit</button>
-  </form>
-</div>; */

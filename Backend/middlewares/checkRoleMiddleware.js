@@ -1,14 +1,13 @@
-const Usuario = require('../models/user')
+const {userModel} = require('../models/user')
 
 const checkRole = (roles) => async (req, res, next) => {
-    let id = req.userId;
-    console.log(id);
-  
-    // Devolver info del usuario de la DB
-    const usuario = await Usuario.findOne({ _id: id });
-    !roles.includes(usuario.rol)
-      ? res.status(403).json("Disculpe, usted no tiene acceso a esta ruta")
-      : next();
+    try {
+      const usuario = await userModel.findOne({ _id: req.userId });
+      if(!roles.includes(usuario.rol)) return res.status(403).json({error : 'acceso denegado'})
+      next()
+    } catch (e) {
+      res.status(401).json({ error: 'Token inválido by rol' })
+    }
 };
 
 module.exports = checkRole;

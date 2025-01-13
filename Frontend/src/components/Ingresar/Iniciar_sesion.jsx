@@ -1,13 +1,14 @@
 import styles from './Ingresar.module.css';
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import { NavLink } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Context from '../../context/context.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+
 const Iniciar_sesion = () => {
-  const { msgError, msgSuccess, loggedIn, setLoggedIn, navigate } = useContext(Context);
+  const { msgError, msgSuccess, setLoggedIn, navigate } = useContext(Context);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -15,15 +16,15 @@ const Iniciar_sesion = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/auth/login', { email, password });
+      const response = await axios.post(`${BACKEND_URL}/auth/login`, { email, password });
       const { token } = response.data;
       localStorage.setItem('token', token);
-      console.log('Iniciaste sesión')
-      msgSuccess("Sesión iniciada con éxito")
-
       setLoggedIn(true);
+      msgSuccess("Sesión iniciada con éxito")
       //navego al inicio luego de loguear para no perder el estado y no se vuelva a setear en false
-      navigate("/");
+      setTimeout(()=>{
+        navigate("/");
+      },1500)
     } catch (error) {
       console.error('Error al iniciar sesión:', error.response.data);
       msgError("Error al iniciar sesión. Registrese o vuelva a intentar")
@@ -50,7 +51,7 @@ const Iniciar_sesion = () => {
           autoComplete='current-password'
         />
         <button type="submit" className={styles.btn}>Ingresar</button>
-        <NavLink to="/Registro" className={styles.parrafo}>Olvidé mi contraseña</NavLink>
+        <p className={styles.parrafo}>¿No tienes una cuenta? Presiona crear cuenta</p>
       </form>
       <ToastContainer />
     </div>
