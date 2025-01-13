@@ -43,8 +43,11 @@ general
         Pasar las img a webp ✅
         Hacer Documentacion ✅
         Hacer el deploy del frontend y el backend✅
+        Arreglar el envio de mail por la vista de contacto ✅
+        el prepietario pueda cargar imagenes en el formu ✅
+        Cargar los datos del user cuando se presiona editar ✅
         Hacer el responsive del frontend ❌
-        Arreglar el envio de mail por la vista de contacto ❌
+
 
     *Footer
         Poner las rutas en 'Oficinas', 'Salas', 'Eventos'. ✅
@@ -58,10 +61,9 @@ general
         Configurar bien lo del mail???
 
     *plus
-        Hacer el responsive de todas las pantallas ❌
-        Usar reseñas reales en el home ❌
-        Agregar los Skeleton a las pantallas y botones que corresponda ❌
+        Usar reseñas reales en el home y agregar calificaciones ❌
         Monetizar el sistema, mirar sistemas como booking ❌
+        Agregar los Skeleton a las pantallas y botones que corresponda ❌
 
 
 Consejos post desarrollo
