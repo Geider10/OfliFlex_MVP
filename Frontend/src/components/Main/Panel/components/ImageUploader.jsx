@@ -46,16 +46,9 @@ const ImageUploader = () => {
   return (
     <div className={styles.container_portada_perfil}>
 
-      {imageUrl ? (
         <div className={styles.container_img_perfil}>
-          <img src={imageUrl} alt="Uploaded avatar" className={styles.img_user} />
+          <img src={imageUrl ||"/user-img-empty.webp"} alt="Uploaded avatar" className={styles.img_user} />
         </div>
-      ) : (
-        <div className={styles.container_img_perfil}>
-          <img src="/user-profile-unloggin.webp" alt="Null avatar" className={styles.img_user} />
-        </div>
-      )}
-
 
       <div className={styles.custom_file_upload}>
         <h2 className={styles.text_name}>{usuario.nombre}</h2>

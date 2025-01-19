@@ -79,9 +79,9 @@ const ServicioForm = ({edit,service,setEdit}) => {
                 <div className={styles.card_info}>
                     <div className={styles.img_servicio}>
                         <div className={styles.container_img_servicio}>     
-                            <img src={preview ? preview: '/user-profile-unloggin.webp'} alt="vista previa de la imagen" className={styles.img_user}/>
+                            <img src={preview || '/service-img-empty.webp'} alt="vista previa de la imagen" className={styles.img_user}/>
                         </div>
-                        <label htmlFor="file-img"  className={styles.input_img} >Cargar imagen</label>
+                        <label htmlFor="file-img"  className={styles.input_img} >Subir</label>
                         <input id='file-img' type="file"  accept="image/*" style={{display:'none'}} onChange={handleFileChange} />
                     </div>
                     <div className={styles.inputs_textContainer}>

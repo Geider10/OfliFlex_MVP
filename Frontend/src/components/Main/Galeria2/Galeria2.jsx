@@ -10,29 +10,14 @@ const Galeria = () => {
       <div id="carouselExampleFade" className="carousel slide carousel-fade">
         <div className="carousel-inner">
 
-          <div className="carousel-item">
-            <img src="/eventos/evento3.webp" className="d-block w-100" alt="Sala 3" />
-          </div>
-
           <div className="carousel-item active">
-            <img src="/salas/sala1.webp" className="d-block w-100" alt="Sala 1" />
+            <img src="/galery/img-oficinas.webp" className="d-block w-100" alt="Sala 1" />
           </div>
 
           <div className="carousel-item">
-            <img src="/salas/sala2.webp" className="d-block w-100" alt="Sala 2" />
+            <img src="/galery/img-salas.webp" className="d-block w-100" alt="Sala 2" />
           </div>
 
-          <div className="carousel-item">
-            <img src="/salas/sala3.webp" className="d-block w-100" alt="Sala 3" />
-          </div>
-
-          <div className="carousel-item">
-            <img src="/eventos/evento2.webp" className="d-block w-100" alt="Sala 3" />
-          </div>
-
-          <div className="carousel-item">
-            <img src="/eventos/evento5.webp" className="d-block w-100" alt="Sala 3" />
-          </div>
         </div>
 
         <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
