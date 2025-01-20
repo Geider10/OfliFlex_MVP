@@ -22,13 +22,13 @@ const Header = () => {
   const controlNavbar = () => {
     if (window.scrollY > 250) {
       setShow(false);
-    } else {
-      setShow(true);
+    } 
+    else{
+      setShow(true)
     }
   };
   const handleOpenMenu = () =>{
     setOpenMenu(!openMenu)
-    console.log(openMenu);
   }
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
@@ -44,7 +44,9 @@ const Header = () => {
           <img className={styles.logo} src="/Logotipo.webp" alt="logo" />
         </Link>
         <div className={styles.container_menu_2}>
-          <ul className={openMenu ? `${styles.container_ul} ${styles.open_container_ul}`: `${styles.container_ul} ${styles.close_container_ul}`}>
+          <ul className={`${styles.container_ul} ${
+             openMenu ? styles.open_container_ul : styles.close_container_ul
+             } ${!show && styles.close_container_ul}`}>
             <NavLink
               className={({ isActive }) =>
                 isActive ? `${styles.navlink} ${styles["navlink-active"]}` : styles.navlink
@@ -90,7 +92,7 @@ const Header = () => {
               <button className={styles.btn}>Ingresar</button>
             </Link>
           )}
-          <GiHamburgerMenu size='30px' color="gray" onClick={handleOpenMenu} className={styles.hamburguer}/>
+          <GiHamburgerMenu size='30px' color="black" onClick={handleOpenMenu} className={styles.hamburguer}/>
         </div>
       </div>
     </div>

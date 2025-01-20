@@ -16,13 +16,17 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 .container_ul {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 2.5rem;
   text-decoration: none;
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .logo {
@@ -149,11 +153,12 @@
   }
   .open_container_ul{
     opacity: 1;
-    pointer-events: auto;
   }
   .close_container_ul{
     opacity: 0;
-    pointer-events: none
+  }
+  .btn{
+    padding: 5px 10px;
   }
   .hamburguer{
     display: hidden;
