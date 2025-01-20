@@ -143,13 +143,13 @@
     display: flex;
     flex-direction: column; /* Configura la dirección vertical */
     justify-content: start;
+    align-items: end;
     gap: 1rem; /* Espacio entre elementos */
     position: absolute;
     top: 70px;
     right: 0;
     height: 100vh; /* Ocupa todo el alto de la pantalla */
-    width: 200px; /* Ancho del menú desplegable */
-    text-align: start;
+    width: 150px; /* Ancho del menú desplegable */
     background-color: aliceblue;
     transform: translateX(100%); /* Oculta la navbar fuera de la vista */
     transition: transform 0.3s ease-in-out; /* Transición suave */
