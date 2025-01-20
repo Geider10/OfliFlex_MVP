@@ -41,6 +41,7 @@
   cursor: pointer;
   transition: background-color 0.5s ease;
   box-shadow: -2px 2px 2px rgba(24, 37, 170, 0.12);
+  text-align: center;
   font-size: 1rem;
 }
 
@@ -50,7 +51,7 @@
 
 
 
-@media (min-width: 769px) {
+@media (min-width: 800px) {
   .input {
     width: 50%;
   }
@@ -58,4 +59,26 @@
   .container_input_filtro{
     width: 60%;
   }
+}
+@media (max-width: 800px){
+  .container_input{
+    padding: 1rem 0px;
+  }
+  .container_input_filtro{
+    padding: 1rem 0px;
+  }
+}
+@media (max-width: 500px){
+  .select{
+    padding: .6rem;
+  }
+  .input{
+    width: 90%;
+    padding: .6rem;
+
+  }
+  .btn {
+    padding: .6rem;
+  }
+
 }

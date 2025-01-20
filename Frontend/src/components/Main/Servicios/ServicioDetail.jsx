@@ -28,9 +28,9 @@ const ServicioDetail = () => {
           <div className={styles.center_column}>
             <img src={servicio.imagen} className={styles.img} />
             <div className={styles.center_row}>
-              <img src={servicio.imagen} className={`${styles.img} ${styles.img_abajo}`} />
-              <img src={servicio.imagen} className={`${styles.img} ${styles.img_abajo}`} />
-              <img src={servicio.imagen} className={`${styles.img} ${styles.img_abajo}`} />
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
             </div>
           </div>
           {/* Parte de texto */}

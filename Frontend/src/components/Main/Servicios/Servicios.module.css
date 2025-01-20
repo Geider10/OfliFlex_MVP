@@ -128,21 +128,27 @@
   align-items: center;
   width: 100%;
   padding: 0px 30px 60px 30px;
-  gap: 10px;
+  gap: 25px;
 }
 
 /* SERVICIO CARD */
 
 .card{
-  max-width: 24rem;
-  padding: 10px;
-  border-radius: 3px;
+  width: 300px;
+  max-height: 400px;
+  border-radius: 10px;
   text-align: start;
+  overflow: hidden;
+  background-color: #ebe7e7;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3)
 }
-
+.card_menu{
+  padding: 10px;
+}
 .img_serv{
   width: 100%;
-  border-radius: 18px;
+  height: 200px;
+  overflow: hidden;
 }
 
 .titulo_card{
@@ -150,14 +156,12 @@
   font-size: 1.4rem;
   color: #25282A;
   font-family: "Raleway", sans-serif;
-  margin: 10px 0px 5px 0px;
 }
 
 .detalles{
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding: 5px 0px;
   color: #25282A;
 }
 
@@ -177,20 +181,17 @@
 }
 
 .btn{
-  background-color: #4169e1;
-  color: white;
+  color: #1442ce;
+  font-weight: 600;
   padding: 8px 15px;
-  border: none;
-  border-radius: .7rem;
   cursor: pointer;
-  margin-top: 5px;
-  width: 100%;
   transition: .5s;
+  list-style: none;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }
 
-.btn:hover {
-  background-color: #1442ce;
-}
 
 /* SERVICIO DETAIL */
 
@@ -232,11 +233,17 @@
     right: 0;
     display: block;
   }
+  .banner_categoria{
+    min-height: 300px;
+  }
+  .container_ul{
+    gap: 2rem;
+  }
 }
 
 @media (max-width:500px){
   .container_servicios{
-    padding: 1.5rem;
+    padding:0;
     gap: 20px;
   }
   .cards_content_2{
@@ -244,5 +251,14 @@
   }
   .cards_content{
     width: 100%;
+  }
+  .banner_categoria{
+    min-height: 200px;
+  }
+  .container_ul{
+    margin: 0px;
+  }
+  .container_reservas{
+    padding: 0px 10px 40px 10px;
   }
 }

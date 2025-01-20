@@ -9,21 +9,19 @@ const ServicioCard = ({ id, titulo, descripcion, imagen, fecha, hora, categoria,
       {disponible ?
       <div className={styles.card} key={id}>
         <Link className={styles.navlink} to={`/servicios/${categoria}/${id}`}>
-        <img className={styles.img_serv} src={imagen} alt={titulo} />
-        <div>
-          <h3 className={styles.titulo_card}>{titulo}</h3>
-          <div className={styles.detalles}>
-            <p>{descripcion}</p>
-
-            <div className={styles.container_fecha}>
-              <p className={styles.p_fecha}><BiCalendarAlt />{fecha}</p>
-              <p className={styles.p_fecha}><BiAlarm />{hora}hs</p>
+          <img className={styles.img_serv} src={imagen} alt={titulo} />
+          <div className={styles.card_menu}>
+            <h3 className={styles.titulo_card}>{titulo}</h3>
+            <div className={styles.detalles}>
+              <div className={styles.container_fecha}>
+                <p className={styles.p_fecha}><BiCalendarAlt />{fecha}</p>
+                <p className={styles.p_fecha}><BiAlarm />{hora}hs</p>
+              </div>
             </div>
           </div>
-        </div>
         </Link>
          <Link to={`/servicios/${categoria}/${id}`}>
-          <button className={styles.btn}>Reservar</button>
+          <p className={styles.btn}>Ver más</p>
         </Link>  
       </div>
       : <></>}
