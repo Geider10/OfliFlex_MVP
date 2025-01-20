@@ -15,8 +15,9 @@
 .container_menu_2{
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
+  gap: 140px;
 }
 .container_ul {
   display: flex;
