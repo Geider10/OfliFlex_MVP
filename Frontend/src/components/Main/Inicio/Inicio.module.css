@@ -70,7 +70,7 @@
 }
 
 .reservar_button{
-  padding: 10px 32px;
+  padding: 10px 25px;
   border-radius: 20rem;
   background-color: #4169E1;
   color: #ffff;
@@ -142,4 +142,32 @@
 
 .navlink:hover{
   color: #2c57da;
+}
+
+@media (max-width:800px){
+  .container_servicios{
+    margin: 2rem 0;
+  }
+  .container_portada{
+    min-height : 400px;
+  }
+  .title{
+    font-size: 3rem;
+    padding: 10px ;
+  }
+  .subtitle{
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width:500px){
+  .container_portada{
+    min-height : 300px;
+  }
+  .title{
+    font-size: 2.5rem;
+  }
+  .subtitle{
+    font-size: 2rem;
+  }
 }

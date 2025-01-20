@@ -139,24 +139,30 @@
     justify-content: end;
     gap: 1.5rem;
   }
-  .container_ul{
-    flex-direction: column;
+  .container_ul {
+    display: flex;
+    flex-direction: column; /* Configura la dirección vertical */
     justify-content: start;
-    gap: 1rem;
+    gap: 1rem; /* Espacio entre elementos */
     position: absolute;
     top: 70px;
     right: 0;
-    height: 100vh;
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
+    width: 200px; /* Ancho del menú desplegable */
     text-align: start;
     background-color: aliceblue;
-    transition: transform 0.3s ease-in-out;
+    transform: translateX(100%); /* Oculta la navbar fuera de la vista */
+    transition: transform 0.3s ease-in-out; /* Transición suave */
     padding: 1rem;
+    z-index: 10; /* Asegura que esté encima de otros elementos */
   }
-  .open_container_ul{
-    opacity: 1;
+  
+  .open_container_ul {
+    transform: translateX(0); /* Despliega la navbar */
   }
-  .close_container_ul{
-    opacity: 0;
+  
+  .close_container_ul {
+    transform: translateX(100%); /* Oculta la navbar */
   }
   .btn{
     padding: 5px 10px;

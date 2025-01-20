@@ -21,9 +21,9 @@ const Inicio = () => {
 
       </div>
       {/* Reseñas */}
-      <div className={styles.container_servicios}>
+      {/* <div className={styles.container_servicios}>
         <h2 className={styles.subtitle}>Reseñas</h2>
-{/* 
+
         <div className={styles.resenas}>
           {resenas.map((item) => {
             return (
@@ -37,9 +37,9 @@ const Inicio = () => {
               />
             )
           })}
-        </div> */}
+        </div>
 
-      </div>
+      </div> */}
 
     </div>
 

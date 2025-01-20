@@ -16,6 +16,8 @@ const Header = () => {
     if(dropDown){
       setDropDown(false)
     }
+    setOpenMenu(!openMenu)
+
   }
 
   const [show, setShow] = useState(true);
