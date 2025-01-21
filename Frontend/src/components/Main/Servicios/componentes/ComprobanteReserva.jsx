@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../ServicioDetail.module.css'
 import { Link } from 'react-router-dom'
 
-export const MsjExito = ({ servicio, usuario, reservaId }) => {
+export const ComprobanteReserva = ({ servicio, usuario, reservaId }) => {
   return (
     <>
       {servicio && usuario &&

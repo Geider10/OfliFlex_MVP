@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import Context from '../../../context/context.jsx';
 import ReservarServicio from './componentes/ReservarSercioDetail.jsx';
 import { BtnBack } from './componentes/BtnBack.jsx';
-import { MsjExito } from './componentes/MsjExito.jsx';
+import { ComprobanteReserva } from './componentes/ComprobanteReserva.jsx';
 import { Button, Stack } from '@chakra-ui/react'
 import { ToastContainer } from "react-toastify";
 
@@ -26,11 +26,11 @@ const ServicioDetail = () => {
           <BtnBack></BtnBack>
           {/* Parte de imagenes */}
           <div className={styles.center_column}>
-            <img src={servicio.imagen} className={styles.img} />
+            <img src={servicio.imagen} className={styles.img} alt = 'imagen detalladas del servicio'/>
             <div className={styles.center_row}>
-              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
-              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
-              <img src={servicio.imagen} className={`${styles.img_abajo}`} />
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} alt = 'imagen detalladas del servicio'/>
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} alt = 'imagen detalladas del servicio'/>
+              <img src={servicio.imagen} className={`${styles.img_abajo}`} alt = 'imagen detalladas del servicio'/>
             </div>
           </div>
           {/* Parte de texto */}
@@ -61,7 +61,7 @@ const ServicioDetail = () => {
           </div>
         </div>
       ) : (
-        <MsjExito usuario={usuario} servicio={servicio} reservaId={reservaId} />
+        <ComprobanteReserva usuario={usuario} servicio={servicio} reservaId={reservaId} />
       )}
       <ToastContainer />
     </>
