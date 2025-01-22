@@ -7,7 +7,7 @@ const uploadImg = multer({
         file: 1
     },
     fileFilter: (req, file, callback) => {//registre los formatos permitidos
-        if (!file.originalname.match(/\.(png|jpeg|jpg)$/)) {
+        if (!file.originalname.match(/\.(png|jpeg|jpg|webp)$/)) {
           return callback(new Error('Por favor subir una foto en formato PNG, JPEG ó JPG'));
         }
         callback(null, true);
