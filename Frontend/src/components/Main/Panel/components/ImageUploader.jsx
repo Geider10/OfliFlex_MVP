@@ -51,10 +51,8 @@ const ImageUploader = () => {
         </div>
 
       <div className={styles.custom_file_upload}>
-        <h2 className={styles.text_name}>{usuario.nombre}</h2>
-        <p>Perfil de {usuario.rol}</p>
         <label htmlFor="file-input" className={styles.file_label} onClick={handleUploadClick}>
-          Cargar imagen
+          Subir
         </label>
         <input id="file-input" type="file" ref={inputFile} style={{ display: 'none' }} accept="image/*" onChange={handleFileChange} />
       </div>

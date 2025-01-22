@@ -17,14 +17,13 @@ const NavVertical = () => {
      
       <ImageUploader />
       {!edit ? 
-        <div className={styles.container_more_info}>
-          <div className={styles.more_info}>
-            <div><b>Email:</b> {usuario.email}</div>
-            <div><b>Edad:</b> {usuario.edad}</div>
-            <div><b>Teléfono:</b> {usuario.telefono}</div>
-            <button className={styles.btn_edit} onClick={handleActivateEdit}>Editar</button>
-          </div>
-        </div>
+        <div className={styles.more_info}>
+          <div><b>Nombre:</b> {usuario.nombre}</div>
+          <div><b>Email:</b> {usuario.email}</div>
+          <div><b>Edad:</b> {usuario.edad}</div>
+          <div><b>Teléfono:</b> {usuario.telefono}</div>
+          <button className={styles.btn_edit} onClick={handleActivateEdit}>Editar</button>
+       </div>
       : 
         <PostUser btnEdit={handleActivateEdit}/>
       }

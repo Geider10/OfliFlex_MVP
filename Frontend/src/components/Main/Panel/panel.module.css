@@ -12,7 +12,6 @@
   width: 30%;
   height: 100%;
   background-color: rgb(232, 232, 232);
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,9 +21,10 @@
 
 .container_portada_perfil{
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
+  gap: 10px;
 }
 
 .container_img_perfil {
@@ -40,10 +40,7 @@
 .container_img_servicio {
   width: 130px;
   height: 130px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  
 }
 .img_user {
   width: 100%;
@@ -68,8 +65,6 @@ input[type="file"] {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  height: 100%;
   color: #25282A;
   font-weight: 300;
   text-indent: 3px;
@@ -80,44 +75,18 @@ input[type="file"] {
  font-size: 1.6rem;
 }
 
-
-.container_more_info{
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  width: 100%;
-  margin-left: -50px;
-  color: #25282A;
-}
-
 .more_info{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 5px;
+  color: #25282A;
+
 }
 
 /* PANEL USUARIO */
-
-input[type="file"] {
-  display: none;
-}
-
-.custom_file_upload {
-  position: relative;
-  display: inline-block;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
-  height: 100%;
-  color: #25282A;
-  font-weight: 300;
-  text-indent: 3px;
-}
 .btn_edit{
-  background-color: rgb(247, 244, 244);;
+  background-color: rgb(247, 244, 244);
   border-radius: 5px ;
   display: inline-block;
   padding: 2px 20px;
@@ -145,22 +114,6 @@ input[type="file"] {
   background-color: #3e8e41;
 }
 
-.container_more_info{
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  width: 100%;
-  margin-left: -50px;
-  color: #25282A;
-}
-
-.more_info{
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 5px;
-}
-
 /* PANEL USUARIO */
 
 
@@ -169,7 +122,6 @@ input[type="file"] {
   height: 100%;
   display: flex;
   padding: 30px;
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
@@ -328,7 +280,7 @@ input[type="file"] {
 .form {
   width: 100%;
   background-color: rgb(232, 232, 232);
-  padding: 1rem;
+  padding: 10px;
   border-radius: .7rem;
   border: 1px solid rgba(0, 0, 0, 0.107);
 }
@@ -340,12 +292,17 @@ input[type="file"] {
 
 .img_servicio{
   border-radius: .5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .inputs_textContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10px;
   width: 100%;
 }
 
@@ -371,7 +328,7 @@ input[type="file"] {
 }
 
 .inputs {
-  padding: .7rem 1.4rem;
+  padding: 5px 10px;
   width: 100%;
   border-radius: 2rem;
   border: 1px solid #25282a3e;
@@ -381,8 +338,7 @@ input[type="file"] {
 .btn_container {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: end;
   gap: 5px;
   margin-top: 5px;
 }
@@ -393,7 +349,6 @@ input[type="file"] {
   padding: .1rem 1.2rem;
   border-radius: .2rem;
   border: none;
-  margin-top: 1rem;
 }
 /* menu .dropdown */
 .dropdown {
@@ -437,4 +392,71 @@ input[type="file"] {
   height: 23px;
   width: 23px;
   cursor: pointer;
+}
+
+@media (max-width:800px){
+  .container_portada_perfil{
+    padding: 0px;
+  }
+  .container{
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  .container_nav{
+    width: 90%;
+    flex-direction: row;
+    align-items: center;
+    padding: 30px 10px;
+    gap: 20px;
+  }
+  .container_img_perfil {
+    width: 130px;
+    height: 130px;
+  }
+  .container_prop_panel{
+    width: 90%;
+  }
+  .container_gralServicios{
+    padding: 0;
+    gap: 1rem;
+  }
+  .card_info {
+    gap: 10px;
+  }
+  .container_cardReserva {
+    padding: 10px;
+  }
+}
+@media (max-width:500px){
+  .container_nav{
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px 10px;
+    gap: 0;
+  }
+  .container_img_perfil {
+    width: 130px;
+    height: 130px;
+  }
+
+  .container_prop_panel{
+    width: 100%;
+    margin-top: 10px;
+  }
+  .container_gralServicios{
+    padding: 0 10px 30px 10px ;
+  }
+  .card_info {
+    flex-direction: column;
+  }
+  .container_card{
+    flex-direction: column;
+  }
+  .img_reserva {
+    width: 100%;
+  }
+  .container_text {
+    padding: 0;
+  }
 }
