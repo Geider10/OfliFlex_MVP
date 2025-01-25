@@ -1,3 +1,4 @@
+![Background del nombre del proyecto](./assets/ofiflex.png)
 ## Tabla de Contenidos
 1. [Presentación](#presentación)
 2. [Instalación](#instalación)
@@ -52,16 +53,17 @@ npm run dev
 
 ## Desarrollo
 ### Tecnologías
+Frontend: JavaScript, React, Axios
 Backend: JavaScript, Node.js, Express, MongoDB.
 
 ### Mejoras Futuras
 * Sistema de reseñas y calificaciones.
 * Integracion de pagos online.
+* Agregar skeleton a los componentes.
 
 ## Herramientas
 ### Librerías del frontend
 - [chakra-ui](https://www.chakra-ui.com/): Usada para diseñar una interfaz accesible y responsiva con componentes.
-- [@emotion/react & @emotion/styled](): Aplicadas para agregar estilos dinámicos y personalizados en los componentes.
 - [axios](https://axios-http.com/): Usada para hacer solicitudes HTTP y gestionar la comunicación con el backend.
 - [bootstrap](https://getbootstrap.com/): La implemente para usar componentes ya diseñados. 
 - [date-fns](https://date-fns.org/docs/Getting-Started):  Utilizada para formatear fechas y filtrar las reservas por activa/finalizada.
@@ -73,7 +75,6 @@ Backend: JavaScript, Node.js, Express, MongoDB.
 - [react-jwt](https://www.npmjs.com/package/react-jwt): Usada para manejar y verificar tokens JWT que vienen del backend.
 - [react-router-dom](https://reactrouter.com/): Implementada para gestionar la navegación entre pantallas en la app.
 - [react-toastify](https://www.npmjs.com/package/react-toastify):Usada para mostrar notificaciones emergentes de éxito o error.
-- [react-transition-group](): Usada para animar transiciones de página y cambios de estado.
 
 ### Librerías del backend
 - [bcrypt](https://www.npmjs.com/package/bcrypt): Utilicé esta librería para encriptar contraseñas de los usuarios antes de almacenarlas en la base de datos.
@@ -92,7 +93,7 @@ Backend: JavaScript, Node.js, Express, MongoDB.
 ## Despliegue
 ### Render (PaaS)
 - Te permite desplegar el frontend y el backend desde una sola plataforma.
-- La capa gratuita te asigna CPU, RAM pero se pueden ajustar.
+- La capa gratuita te asigna recursos (CPU, RAM, etc.)pero se pueden ajustar.
 - Simplicidad y escalabilidad.
 
 ### Links

@@ -65,6 +65,29 @@ general
         Monetizar el sistema, mirar sistemas como booking ❌
         Agregar los Skeleton a las pantallas y botones que corresponda ❌
 
+Consejos hacer responsive
+
+Prioriza componentes clave:
+Haz responsive primero los componentes más visibles (header, navbar, footer).
+
+Utiliza inspección en navegadores:
+Identifica rápidamente los elementos que necesitan ajustes.
+
+Optimiza imágenes y recursos:
+Usa imágenes con tamaños ajustados y formatos optimizados (ej. WebP).
+
+Itera desde lo general a lo específico:
+Ajusta primero los contenedores principales y luego los componentes internos.
+
+Medidas 
+@media (max-width: 900px) {}
+@media (max-width: 600px) {}
+
+
+imagenes
+* 15, 5 de Oficinas, 5 de salas, 5 de Eventos
+* Informcion con chatgpt
+* revisar imagen del home
 
 Consejos post desarrollo
     * BACKEND
@@ -72,7 +95,7 @@ Consejos post desarrollo
         * Aplicar buenas cardinalidades entre las entidades usando populate/FK
         * Integrar autenticacion manual facil de escalar, jwt y estrategias de passport
         * Trabajar con POO
-        * carpetas: index/utils => route/middleware => controller => dao => models
+        * carpetas: index  => route => middleware => controller => service => modelos
 
     * FRONTEND
         * Estilos con modulos
