@@ -54,7 +54,10 @@ npm run dev
 ## Desarrollo
 ### Tecnologías
 Frontend: JavaScript, React, Axios
-Backend: JavaScript, Node.js, Express, MongoDB.
+
+Backend: JavaScript, Node.js, Express
+
+Base de datos: MongoDB, Mongoose
 
 ### Mejoras Futuras
 * Sistema de reseñas y calificaciones.
