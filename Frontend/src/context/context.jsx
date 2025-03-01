@@ -47,7 +47,7 @@ export const ContextProvider = ({ children }) => {
       .catch((error) => {
         console.error("Error al obtener servicios:", error);
       });
-  }, [serviciosFiltrados]);
+  }, []);
 
 
   //TRAIGO LA API DE USER/:ID
