@@ -13,11 +13,12 @@ const mongoose = require("mongoose");
 const app = express();
 
 const corsOptions = {
-  origin: [FRONTEND_URL],
+  origin: FRONTEND_URL,
   optionsSuccessStatus: 200,
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
 };
+console.log(FRONTEND_URL);
 app.use(cors(corsOptions));
-app.set("PORT", 3000);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
