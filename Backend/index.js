@@ -8,17 +8,12 @@ const serviciosRoutes = require("./routes/servicios.routes");
 const authRoutes = require("./routes/auth.routes");
 const uploadRoutes = require("./routes/upload.routes"); // Importa las rutas de upload
 const mailingRouter = require("./routes/mailing.routes")
-const {PORT,MONGO_URI, FRONTEND_URL} = require("./config");
+const {PORT,MONGO_URI, corsOptions,limiter} = require("./config");
 const mongoose = require("mongoose");
 const app = express();
 
-const corsOptions = {
-  origin: FRONTEND_URL,
-  optionsSuccessStatus: 200,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE"
-};
-console.log(FRONTEND_URL);
 app.use(cors(corsOptions));
+app.use(limiter);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(passport.initialize());
