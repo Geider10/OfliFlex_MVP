@@ -6,3 +6,6 @@
   height: max-content;
   width: 100%;
 }
+.container_loader{
+  margin: 30px 0;
+}

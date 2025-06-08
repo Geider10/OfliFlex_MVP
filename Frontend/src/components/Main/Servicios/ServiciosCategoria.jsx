@@ -1,16 +1,24 @@
 import styles from './Servicios.module.css';
 import ServicioCard from './componentes/ServicioCard.jsx';
-import { useContext } from 'react';
+import { useContext, useState, useEffect} from 'react';
 import Context from '../../../context/context.jsx';
 import { Buscador } from '../../Filtrado/Buscador.jsx';
-import { useParams } from 'react-router-dom';
-import { NavLink } from 'react-router-dom';
+import { useParams,  NavLink  } from 'react-router-dom';
+import Loader from '../Loader.jsx'; 
 
 const ServicioCategoria = () => {
   const { serviciosFiltrados } = useContext(Context);
   const { categoria } = useParams();
+  const [loading, setLoading] = useState(true)
 
   const servicios = serviciosFiltrados.filter(servicio => servicio.categoria.toLowerCase() === categoria.toLowerCase());
+
+  useEffect(()=>{
+    setLoading(true);
+    setTimeout(()=>{
+      setLoading(false);
+    },3000)
+  },[])
 
   let content;
   switch (categoria) {
@@ -59,9 +67,16 @@ const ServicioCategoria = () => {
       </ul>
 
       <Buscador categoria={categoria} />
-
+     
       <div className={styles.container_reservas}>
-        {servicios.map(servicio => (
+        {loading && (
+            <Loader/>
+        )}
+        {(!loading && servicios.length === 0) && (
+          <h2>No hay servicios disponibles.</h2>
+          )
+        }
+        {!loading && servicios.map(servicio => (
           <ServicioCard
             key={servicio.servicioID}
             id={servicio.servicioID}
