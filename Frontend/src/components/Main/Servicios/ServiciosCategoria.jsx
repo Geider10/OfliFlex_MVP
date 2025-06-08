@@ -14,29 +14,25 @@ const ServicioCategoria = () => {
   const servicios = serviciosFiltrados.filter(servicio => servicio.categoria.toLowerCase() === categoria.toLowerCase());
 
   useEffect(()=>{
-    setLoading(true);
+   setLoading(true);
     setTimeout(()=>{
       setLoading(false);
-    },3000)
-  },[])
-
+    },2000)
+  },[categoria])
+ 
   let content;
   switch (categoria) {
     case 'oficinas':
-      content = <div className={`${styles.banner_categoria} ${styles.banner_oficinas}`}>
-      </div>;
+      content = <div className={`${styles.banner_categoria} ${styles.banner_oficinas}`}></div>;
       break;
     case 'salas':
-      content = <div className={`${styles.banner_categoria} ${styles.banner_salas}`}>
-      </div>;
+      content = <div className={`${styles.banner_categoria} ${styles.banner_salas}`}></div>;
       break;
     case 'eventos':
-      content = <div className={`${styles.banner_categoria} ${styles.banner_eventos}`}>
-      </div>;
+      content = <div className={`${styles.banner_categoria} ${styles.banner_eventos}`}></div>;
       break;
     default:
-      content = <div className={`${styles.banner_categoria} ${styles.banner_oficinas}`}>
-      </div>;
+      content = <div className={`${styles.banner_categoria} ${styles.banner_oficinas}`}></div>;
       break;
   }
 
@@ -67,28 +63,27 @@ const ServicioCategoria = () => {
       </ul>
 
       <Buscador categoria={categoria} />
-     
-      <div className={styles.container_reservas}>
-        {loading && (
-            <Loader/>
-        )}
-        {(!loading && servicios.length === 0) && (
-          <h2>No hay servicios disponibles.</h2>
-          )
-        }
-        {!loading && servicios.map(servicio => (
-          <ServicioCard
-            key={servicio.servicioID}
-            id={servicio.servicioID}
-            titulo={servicio.titulo}
-            descripcion={servicio.descripcion}
-            disponible={servicio.disponible}
-            imagen={servicio.imagen}
-            fecha={servicio.fecha}
-            hora={servicio.hora}
-            categoria={servicio.categoria}
-          />
-        ))}
+        <div className={styles.reservas}>
+          {loading && (
+              <Loader/>
+          )}
+          {(!loading && servicios.length === 0) && (
+            <h2>No hay servicios disponibles.</h2>
+            )
+          }
+          {!loading && servicios.map(servicio => (
+            <ServicioCard
+              key={servicio.servicioID}
+              id={servicio.servicioID}
+              titulo={servicio.titulo}
+              descripcion={servicio.descripcion}
+              disponible={servicio.disponible}
+              imagen={servicio.imagen}
+              fecha={servicio.fecha}
+              hora={servicio.hora}
+              categoria={servicio.categoria}
+            />
+          ))}
       </div>
 
     </div>
