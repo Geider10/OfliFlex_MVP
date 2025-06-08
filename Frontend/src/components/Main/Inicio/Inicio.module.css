@@ -13,9 +13,7 @@
   background-repeat: no-repeat;
   background-position: center;
   width: 100%;
-  min-height: 550px;
-  height: 100%;
-  padding-top: 5rem;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,12 +27,12 @@
 
 /* Servicios */
 .container_servicios{
-  width: 100%;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
-  margin: 3rem 0;
+  gap: 5rem;
+  margin-top: 6rem;
 }
 
 .subtitle{
@@ -42,7 +40,6 @@
   font-size: 3rem;
   max-width: 45rem;
   font-weight: 600;
-  margin-bottom: 20px;
 }
 
 .servicios{
@@ -125,10 +122,6 @@
   font-size: 1.2rem;
 }
 
-.resenas_img_title{
-  font-weight: 200;
-}
-
 .fecha, .reservar_button{
   font-size: 1.2rem;
 }
@@ -161,9 +154,10 @@
   }
 }
 
-@media (max-width:500px){
+@media (max-width:550px){
   .container_servicios{
-    padding:0px 10px;
+    padding:0px 20px;
+    width: 100%;
   }
   .container_portada{
     min-height : 300px;

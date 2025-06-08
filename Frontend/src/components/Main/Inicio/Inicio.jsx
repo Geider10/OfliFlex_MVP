@@ -13,34 +13,13 @@ const Inicio = () => {
           <h1 className={styles.title}>Nuestro espacio para vos</h1>
         </div>
       </div>
-      {/* Servicios */}
+      
       <div className={styles.container_servicios}>
         <h2 className={styles.subtitle}>Soluciones modernas</h2>
         <Servicios/>
         <NavLink to={'/servicios/oficinas'} className={styles.reservar_button}>Reservar</NavLink>
 
       </div>
-      {/* Reseñas */}
-      {/* <div className={styles.container_servicios}>
-        <h2 className={styles.subtitle}>Reseñas</h2>
-
-        <div className={styles.resenas}>
-          {resenas.map((item) => {
-            return (
-              <Resena
-                key={item.id}
-                nombre={item.nombre}
-                descripcion={item.descripcion}
-                img={item.img}
-                fecha={item.fecha}
-                puntuacion={item.puntuacion}
-              />
-            )
-          })}
-        </div>
-
-      </div> */}
-
     </div>
 
   )

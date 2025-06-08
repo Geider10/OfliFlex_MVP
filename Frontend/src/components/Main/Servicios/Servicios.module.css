@@ -7,8 +7,8 @@
   justify-content: space-evenly;
   align-items: center;
   min-height: 600px;
-  padding: 3rem 4rem;
-  gap: 40px;
+  gap: 100px;
+  padding: 1.5rem 2rem;
 }
 
 .servicios_cards{
@@ -241,10 +241,10 @@
   }
 }
 
-@media (max-width:500px){
+@media (max-width:550px){
   .container_servicios{
     padding:0;
-    gap: 20px;
+    gap: 40px;
   }
   .cards_content_2{
     display: none;
