@@ -9,7 +9,7 @@ const signup = async (req,res) => {
     try{
         const user = await userModel.findOne({email : data.email})
         if(user) return res.status(400).json({message: 'The user already exists'})
-        await userModel.create(data)
+        await userModel.create({...data,rol: "usuario"})
         res.status(201).json({message: 'User created successfully'})    
         }
     catch(e){
@@ -25,7 +25,7 @@ const login = async (req, res) => {
         const validate = await user.isValidPassword(password) //retorna true o false
         if(!validate) return res.status(400).json({message: 'Incorrect password'})
         const bodyToken = {_id: user._id, email: user.email}
-        const token = jwt.sign({user: bodyToken}, JWT_SECRET_KEY, {expiresIn: '1h'}) 
+        const token = jwt.sign({user: bodyToken}, JWT_SECRET_KEY, {expiresIn: '15m'}) 
         res.status(200).json({token})
     }
     catch(e){
