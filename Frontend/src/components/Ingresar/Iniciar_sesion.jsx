@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import Context from '../../context/context.jsx';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
+const BACKEND_URL =  'http://localhost:3000' || import.meta.env.VITE_BACKEND_URL 
 
 const Iniciar_sesion = () => {
   const { msgError, msgSuccess, setLoggedIn, navigate } = useContext(Context);
@@ -24,7 +24,7 @@ const Iniciar_sesion = () => {
       //navego al inicio luego de loguear para no perder el estado y no se vuelva a setear en false
       setTimeout(()=>{
         navigate("/");
-      },1500)
+      },2000)
     } catch (error) {
       console.error('Error al iniciar sesión:', error.response.data);
       msgError("Error al iniciar sesión. Registrese o vuelva a intentar")

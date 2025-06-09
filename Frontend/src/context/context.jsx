@@ -76,7 +76,6 @@ export const ContextProvider = ({ children }) => {
         }
       } catch (error) {
         console.error("Error al obtener usuario:", error);
-        closeSession()
       }
     };
 
@@ -84,7 +83,7 @@ export const ContextProvider = ({ children }) => {
       fetchUsuario();
     }
     
-  }, [authToken, usuarioId, usuario.listaReservas]);
+  }, [authToken,usuarioId]);
 
   const closeSession = () => {
     navigate("/");
