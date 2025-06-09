@@ -73,7 +73,7 @@ const ServicioCategoria = () => {
           }
           {!loading && servicios.map(servicio => (
             <ServicioCard
-              key={servicio.servicioID}
+              key={servicio._id}
               id={servicio.servicioID}
               titulo={servicio.titulo}
               descripcion={servicio.descripcion}

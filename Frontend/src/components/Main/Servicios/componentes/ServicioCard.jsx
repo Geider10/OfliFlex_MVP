@@ -6,7 +6,7 @@ import { BiCalendarAlt } from "react-icons/bi";
 const ServicioCard = ({ id, titulo, descripcion, imagen, fecha, hora, categoria, disponible }) => {
   return (
     <>
-      {disponible ?
+      {disponible &&
       <div className={styles.card} key={id}>
         <Link className={styles.navlink} to={`/servicios/${categoria}/${id}`}>
           <img className={styles.img_serv} src={imagen} alt={titulo} />
@@ -24,7 +24,7 @@ const ServicioCard = ({ id, titulo, descripcion, imagen, fecha, hora, categoria,
           <p className={styles.btn}>Ver más</p>
         </Link>  
       </div>
-      : <></>}
+       }
       </>
   );
 };

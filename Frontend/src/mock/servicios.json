@@ -1,0 +1,122 @@
+[
+  {
+    "_id":  "6665f7a0e1d0e4a123000001" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000001" ,
+    "titulo": "Oficina Torre Catalinas",
+    "descripcion": "Oficina premium en el corazón financiero de Buenos Aires. Equipamiento moderno, vistas al Río de la Plata y acceso exclusivo a salas de reuniones.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "22/01/2025",
+    "hora": "09:00-18:00",
+    "categoria": "Oficinas",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000002" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000002" ,
+    "titulo": "Oficina Microcentro",
+    "descripcion": "Espacio funcional y cómodo ubicado en el microcentro porteño. Ideal para pequeñas startups o profesionales independientes.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "10/02/2025",
+    "hora": "08:30-17:00",
+    "categoria": "Oficinas",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000003" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000003" ,
+    "titulo": "Oficina Palermo Soho",
+    "descripcion": "Oficina moderna con diseño industrial en el corazón de Palermo. Incluye cocina equipada y espacios comunes colaborativos.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "05/03/2025",
+    "hora": "10:00-19:00",
+    "categoria": "Oficinas",
+    "__v": { "$numberInt": "0" }
+  },
+
+  {
+    "_id":  "6665f7a0e1d0e4a123000004" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000004" ,
+    "titulo": "Sala de reuniones ejecutiva",
+    "descripcion": "Sala equipada con proyector, pizarra, aire acondicionado y capacidad para 10 personas. Ideal para presentaciones o reuniones ejecutivas.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "15/01/2025",
+    "hora": "09:00-13:00",
+    "categoria": "Salas",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000005" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000005" ,
+    "titulo": "Sala Creativa Chacarita",
+    "descripcion": "Espacio creativo para workshops, sesiones de brainstorming o actividades de team building. Mobiliario modular y buena acústica.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "25/01/2025",
+    "hora": "14:00-18:00",
+    "categoria": "Salas",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000006" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000006" ,
+    "titulo": "Sala de capacitación Congreso",
+    "descripcion": "Sala para capacitaciones o cursos. Capacidad para 20 personas. Incluye proyector, sillas con pupitre y conexión WiFi.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "30/01/2025",
+    "hora": "08:00-12:00",
+    "categoria": "Salas",
+    "__v": { "$numberInt": "0" }
+  },
+
+  {
+    "_id":  "6665f7a0e1d0e4a123000007" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000007" ,
+    "titulo": "Salón para eventos corporativos",
+    "descripcion": "Salón amplio para eventos empresariales con capacidad para 100 personas. Incluye servicio de catering, sonido y escenario.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "12/02/2025",
+    "hora": "18:00-23:00",
+    "categoria": "Eventos",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000008" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000008" ,
+    "titulo": "Terraza para eventos Palermo",
+    "descripcion": "Espacio al aire libre ideal para eventos sociales o de networking. Vista panorámica, barra de tragos y música en vivo disponible.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "18/03/2025",
+    "hora": "17:00-22:00",
+    "categoria": "Eventos",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id":  "6665f7a0e1d0e4a123000009" ,
+    "userId":  "6845cee5db0902a17d53f453" ,
+    "servicioID":  "7775f7a0e1d0e4a123000009" ,
+    "titulo": "Espacio cultural San Telmo",
+    "descripcion": "Salón multipropósito con estilo colonial, ideal para exposiciones artísticas, ferias o presentaciones culturales.",
+    "imagen": "",
+    "disponible": true,
+    "fecha": "20/02/2025",
+    "hora": "10:00-20:00",
+    "categoria": "Eventos",
+    "__v": { "$numberInt": "0" }
+  }
+
+]

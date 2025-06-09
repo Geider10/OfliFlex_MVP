@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useJwt } from "react-jwt";
-
+import servicesMockeados from '../mock/servicios.json';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'
 
 const Context = createContext();
@@ -47,6 +47,9 @@ export const ContextProvider = ({ children }) => {
       .catch((error) => {
         console.error("Error al obtener servicios:", error);
       });
+    if(servicios.length == 0){
+       setServicios(servicesMockeados)
+    }
   }, []);
 
 
@@ -72,10 +75,11 @@ export const ContextProvider = ({ children }) => {
           setUsuario(response.data);
         } else {
           console.error("Token o usuario ID no disponibles");
-          closeSession()//se cierra la session cuando el token se expira
+         
         }
       } catch (error) {
         console.error("Error al obtener usuario:", error);
+         closeSession()//se cierra la session cuando el token se expira
       }
     };
 

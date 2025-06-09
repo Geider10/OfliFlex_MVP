@@ -10,7 +10,7 @@ const [filtro, setFiltro] = useState('activas');
 const [reservas, setReservas] = useState([])
 const [reservasFiltradas, setReservasFiltradas] = useState([]); // Para almacenar las reservas filtradas
 
-const filtroFechaReservas = (nuevoFiltro = filtro) => {
+const filtroFechaReservas = (nuevoFiltro) => {
   const hoy = new Date();
   const reservasData = reservas.filter((reserva) => {
     if (!reserva.fecha) {
@@ -37,10 +37,10 @@ const filtroFechaReservas = (nuevoFiltro = filtro) => {
     const data = dataUser.map((reserva) => {
       // Buscar el servicio correspondiente a la reserva
       const servicio = servicios.find(s => s.servicioID.toString() == reserva.servicioID.toString());
-      return servicio // Añadir el servicio a data
+      return servicio 
     })
     setReservas(data)
-    filtroFechaReservas(filtro);
+    //filtroFechaReservas(filtro);
   }, [usuario.listaReservas,usuario.listaServicios,servicios]);
   
   return (

@@ -1,7 +1,5 @@
 import styles from './Inicio.module.css';
-import resenas from '../../../data/resenas.json';
 import Servicios from '../Servicios/Servicios';
-import { Resena } from './Resena';
 import { NavLink } from 'react-router-dom'
 
 const Inicio = () => {
